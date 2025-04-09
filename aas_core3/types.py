@@ -1,5 +1,6 @@
 """
-Provide an implementation of the Asset Administration Shell (AAS) V3.0.
+--- WORK IN PROGRESS ---
+Provide an implementation of the Asset Administration Shell (AAS) V3.1.
 
 The presented version of the Metamodel is related to the work of
 aas-core-works, which can be found here: https://github.com/aas-core-works.
@@ -517,7 +518,7 @@ class HasKind(Class):
     Default for an element is that it is representing an instance.
     """
 
-    #: Kind of the element: either type or instance.
+    #: Kind of the element: either template or instance.
     #:
     #: Default: :py:attr:`ModellingKind.INSTANCE`
     kind: Optional['ModellingKind']
@@ -1066,9 +1067,8 @@ class AssetInformation(Class):
     :constraint AASd-116:
         .. _constraint_AASd-116:
 
-        ``globalAssetId`` is a reserved key. If used as value for
-        :py:attr:`SpecificAssetID.name` then :py:attr:`SpecificAssetID.value` shall be
-        identical to :py:attr:`global_asset_id`.
+        ``globalAssetId`` is a reserved key for :py:attr:`SpecificAssetID.name` with the
+        semantics as defined in :py:attr:`global_asset_id`.
 
         .. note::
 
@@ -1308,7 +1308,10 @@ class AssetKind(enum.Enum):
     #: Instance asset
     INSTANCE = 'Instance'
 
-    #: Neither a type asset nor an instance asset
+    #: Role asset
+    ROLE = 'Role'
+
+    #: Neither a type asset nor an instance asset nor a role asset
     NOT_APPLICABLE = 'NotApplicable'
 
 
@@ -1686,10 +1689,10 @@ class RelationshipElement(SubmodelElement):
     """
 
     #: Reference to the first element in the relationship taking the role of the subject.
-    first: 'Reference'
+    first: Optional['Reference']
 
     #: Reference to the second element in the relationship taking the role of the object.
-    second: 'Reference'
+    second: Optional['Reference']
 
     def descend_once(self) -> Iterator[Class]:
         """
@@ -1720,9 +1723,11 @@ class RelationshipElement(SubmodelElement):
         if self.embedded_data_specifications is not None:
             yield from self.embedded_data_specifications
 
-        yield self.first
+        if self.first is not None:
+            yield self.first
 
-        yield self.second
+        if self.second is not None:
+            yield self.second
 
     def descend(self) -> Iterator[Class]:
         """
@@ -1771,13 +1776,15 @@ class RelationshipElement(SubmodelElement):
 
                 yield from yet_yet_yet_yet_another_item.descend()
 
-        yield self.first
+        if self.first is not None:
+            yield self.first
 
-        yield from self.first.descend()
+            yield from self.first.descend()
 
-        yield self.second
+        if self.second is not None:
+            yield self.second
 
-        yield from self.second.descend()
+            yield from self.second.descend()
 
     def accept(self, visitor: "AbstractVisitor") -> None:
         """Dispatch the :paramref:`visitor` on this instance."""
@@ -1811,8 +1818,6 @@ class RelationshipElement(SubmodelElement):
 
     def __init__(
             self,
-            first: 'Reference',
-            second: 'Reference',
             extensions: Optional[List['Extension']] = None,
             category: Optional[str] = None,
             id_short: Optional[str] = None,
@@ -1821,7 +1826,9 @@ class RelationshipElement(SubmodelElement):
             semantic_id: Optional['Reference'] = None,
             supplemental_semantic_ids: Optional[List['Reference']] = None,
             qualifiers: Optional[List['Qualifier']] = None,
-            embedded_data_specifications: Optional[List['EmbeddedDataSpecification']] = None
+            embedded_data_specifications: Optional[List['EmbeddedDataSpecification']] = None,
+            first: Optional['Reference'] = None,
+            second: Optional['Reference'] = None
     ) -> None:
         """Initialize with the given values."""
         SubmodelElement.__init__(
@@ -1905,12 +1912,6 @@ class SubmodelElementList(SubmodelElement):
         If a first level child element in a :py:class:`SubmodelElementList` does not
         specify a :py:attr:`HasSemantics.semantic_id` then the value is assumed to be
         identical to :py:attr:`semantic_id_list_element`.
-
-    :constraint AASd-120:
-        .. _constraint_AASd-120:
-
-        The :py:attr:`id_short` of a :py:class:`SubmodelElement` being a direct child of a
-        :py:class:`SubmodelElementList` shall not be specified.
 
     :constraint AASd-108:
         .. _constraint_AASd-108:
@@ -2291,19 +2292,7 @@ class DataElement(SubmodelElement):
 
     A data element is a submodel element that has a value. The type of value differs
     for different subtypes of data elements.
-
-    :constraint AASd-090:
-        .. _constraint_AASd-090:
-
-        For data elements :py:attr:`category` shall be one of the following
-        values: ``CONSTANT``, ``PARAMETER`` or ``VARIABLE``.
-
-        Default: ``VARIABLE``
     """
-
-    def category_or_default(self) -> str:
-        """Return the :py:attr:`category` if set or the default value otherwise."""
-        return self.category if self.category else "VARIABLE"
 
     def __init__(
             self,
@@ -3021,7 +3010,7 @@ class Blob(DataElement):
     #: ``image/jpg``.
     #:
     #: The allowed values are defined as in RFC2046.
-    content_type: str
+    content_type: Optional[str]
 
     def descend_once(self) -> Iterator[Class]:
         """
@@ -3131,7 +3120,6 @@ class Blob(DataElement):
 
     def __init__(
             self,
-            content_type: str,
             extensions: Optional[List['Extension']] = None,
             category: Optional[str] = None,
             id_short: Optional[str] = None,
@@ -3141,7 +3129,8 @@ class Blob(DataElement):
             supplemental_semantic_ids: Optional[List['Reference']] = None,
             qualifiers: Optional[List['Qualifier']] = None,
             embedded_data_specifications: Optional[List['EmbeddedDataSpecification']] = None,
-            value: Optional[bytes] = None
+            value: Optional[bytes] = None,
+            content_type: Optional[str] = None
     ) -> None:
         """Initialize with the given values."""
         DataElement.__init__(
@@ -3175,7 +3164,7 @@ class File(DataElement):
     #: Content type of the content of the file.
     #:
     #: The content type states which file extensions the file can have.
-    content_type: str
+    content_type: Optional[str]
 
     def descend_once(self) -> Iterator[Class]:
         """
@@ -3285,7 +3274,6 @@ class File(DataElement):
 
     def __init__(
             self,
-            content_type: str,
             extensions: Optional[List['Extension']] = None,
             category: Optional[str] = None,
             id_short: Optional[str] = None,
@@ -3295,7 +3283,8 @@ class File(DataElement):
             supplemental_semantic_ids: Optional[List['Reference']] = None,
             qualifiers: Optional[List['Qualifier']] = None,
             embedded_data_specifications: Optional[List['EmbeddedDataSpecification']] = None,
-            value: Optional[str] = None
+            value: Optional[str] = None,
+            content_type: Optional[str] = None
     ) -> None:
         """Initialize with the given values."""
         DataElement.__init__(
@@ -3360,9 +3349,11 @@ class AnnotatedRelationshipElement(RelationshipElement):
         if self.embedded_data_specifications is not None:
             yield from self.embedded_data_specifications
 
-        yield self.first
+        if self.first is not None:
+            yield self.first
 
-        yield self.second
+        if self.second is not None:
+            yield self.second
 
         if self.annotations is not None:
             yield from self.annotations
@@ -3414,13 +3405,15 @@ class AnnotatedRelationshipElement(RelationshipElement):
 
                 yield from yet_yet_yet_yet_another_item.descend()
 
-        yield self.first
+        if self.first is not None:
+            yield self.first
 
-        yield from self.first.descend()
+            yield from self.first.descend()
 
-        yield self.second
+        if self.second is not None:
+            yield self.second
 
-        yield from self.second.descend()
+            yield from self.second.descend()
 
         if self.annotations is not None:
             for yet_yet_yet_yet_yet_another_item in self.annotations:
@@ -3460,8 +3453,6 @@ class AnnotatedRelationshipElement(RelationshipElement):
 
     def __init__(
             self,
-            first: 'Reference',
-            second: 'Reference',
             extensions: Optional[List['Extension']] = None,
             category: Optional[str] = None,
             id_short: Optional[str] = None,
@@ -3471,13 +3462,13 @@ class AnnotatedRelationshipElement(RelationshipElement):
             supplemental_semantic_ids: Optional[List['Reference']] = None,
             qualifiers: Optional[List['Qualifier']] = None,
             embedded_data_specifications: Optional[List['EmbeddedDataSpecification']] = None,
+            first: Optional['Reference'] = None,
+            second: Optional['Reference'] = None,
             annotations: Optional[List['DataElement']] = None
     ) -> None:
         """Initialize with the given values."""
         RelationshipElement.__init__(
             self,
-            first,
-            second,
             extensions,
             category,
             id_short,
@@ -3486,7 +3477,9 @@ class AnnotatedRelationshipElement(RelationshipElement):
             semantic_id,
             supplemental_semantic_ids,
             qualifiers,
-            embedded_data_specifications
+            embedded_data_specifications,
+            first,
+            second
         )
         self.annotations = annotations
 
@@ -3499,8 +3492,7 @@ class Entity(SubmodelElement):
         .. _constraint_AASd-014:
 
         Either the attribute :py:attr:`global_asset_id` or :py:attr:`specific_asset_ids`
-        of an :py:class:`Entity` must be set if :py:attr:`entity_type` is set to
-        :py:attr:`EntityType.SELF_MANAGED_ENTITY`. They are not existing otherwise.
+        of an :py:class:`Entity` must be set if Entity/entityType is set to :py:attr:`EntityType.SELF_MANAGED_ENTITY`.
     """
 
     #: Describes statements applicable to the entity by a set of submodel elements,
@@ -3508,7 +3500,7 @@ class Entity(SubmodelElement):
     statements: Optional[List['SubmodelElement']]
 
     #: Describes whether the entity is a co-managed entity or a self-managed entity.
-    entity_type: 'EntityType'
+    entity_type: Optional['EntityType']
 
     #: Global identifier of the asset the entity is representing.
     #:
@@ -3661,7 +3653,7 @@ class Entity(SubmodelElement):
 
     def __init__(
             self,
-            entity_type: 'EntityType',
+            entity_type: Optional['EntityType'],
             extensions: Optional[List['Extension']] = None,
             category: Optional[str] = None,
             id_short: Optional[str] = None,
@@ -5554,11 +5546,11 @@ class DataSpecificationContent(Class):
 class EmbeddedDataSpecification(Class):
     """Embed the content of a data specification."""
 
-    #: Reference to the data specification
-    data_specification: 'Reference'
-
     #: Actual content of the data specification
     data_specification_content: 'DataSpecificationContent'
+
+    #: Reference to the data specification
+    data_specification: 'Reference'
 
     def descend_once(self) -> Iterator[Class]:
         """
@@ -5568,9 +5560,9 @@ class EmbeddedDataSpecification(Class):
 
         :yield: instances directly referenced from this instance
         """
-        yield self.data_specification
-
         yield self.data_specification_content
+
+        yield self.data_specification
 
     def descend(self) -> Iterator[Class]:
         """
@@ -5578,13 +5570,13 @@ class EmbeddedDataSpecification(Class):
 
         :yield: instances recursively referenced from this instance
         """
-        yield self.data_specification
-
-        yield from self.data_specification.descend()
-
         yield self.data_specification_content
 
         yield from self.data_specification_content.descend()
+
+        yield self.data_specification
+
+        yield from self.data_specification.descend()
 
     def accept(self, visitor: "AbstractVisitor") -> None:
         """Dispatch the :paramref:`visitor` on this instance."""
@@ -5618,12 +5610,12 @@ class EmbeddedDataSpecification(Class):
 
     def __init__(
             self,
-            data_specification: 'Reference',
-            data_specification_content: 'DataSpecificationContent'
+            data_specification_content: 'DataSpecificationContent',
+            data_specification: 'Reference'
     ) -> None:
         """Initialize with the given values."""
-        self.data_specification = data_specification
         self.data_specification_content = data_specification_content
+        self.data_specification = data_specification
 
 
 class DataTypeIEC61360(enum.Enum):
@@ -5867,7 +5859,7 @@ class ValueReferencePair(Class):
     #: .. note::
     #:
     #:     It is recommended to use a global reference.
-    value_id: 'Reference'
+    value_id: Optional['Reference']
 
     def descend_once(self) -> Iterator[Class]:
         """
@@ -5877,7 +5869,8 @@ class ValueReferencePair(Class):
 
         :yield: instances directly referenced from this instance
         """
-        yield self.value_id
+        if self.value_id is not None:
+            yield self.value_id
 
     def descend(self) -> Iterator[Class]:
         """
@@ -5885,9 +5878,10 @@ class ValueReferencePair(Class):
 
         :yield: instances recursively referenced from this instance
         """
-        yield self.value_id
+        if self.value_id is not None:
+            yield self.value_id
 
-        yield from self.value_id.descend()
+            yield from self.value_id.descend()
 
     def accept(self, visitor: "AbstractVisitor") -> None:
         """Dispatch the :paramref:`visitor` on this instance."""
@@ -5922,7 +5916,7 @@ class ValueReferencePair(Class):
     def __init__(
             self,
             value: str,
-            value_id: 'Reference'
+            value_id: Optional['Reference']
     ) -> None:
         """Initialize with the given values."""
         self.value = value

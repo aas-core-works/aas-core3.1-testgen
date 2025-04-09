@@ -20,7 +20,7 @@ def main() -> int:
     parser.add_argument(
         "--codegened_dir",
         help="path to the directory containing the generated code",
-        default=str(repo_dir / "aas_core3_0_testgen" / "codegened"),
+        default=str(repo_dir / "aas_core3_1_testgen" / "codegened"),
     )
     args = parser.parse_args()
 

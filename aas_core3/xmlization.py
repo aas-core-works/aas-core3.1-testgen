@@ -110,7 +110,7 @@ else:
 
 
 #: XML namespace in which all the elements are expected to reside
-NAMESPACE = 'https://admin-shell.io/aas/3/0'
+NAMESPACE = 'https://admin-shell.io/aas/3/1'
 
 
 # region De-serialization
@@ -14225,19 +14225,7 @@ def _read_relationship_element_as_sequence(
             exception.path._prepend(ElementSegment(next_element))
             raise
 
-    if reader_and_setter.first is None:
-        raise DeserializationException(
-            "The required property 'first' is missing"
-        )
-
-    if reader_and_setter.second is None:
-        raise DeserializationException(
-            "The required property 'second' is missing"
-        )
-
     return aas_types.RelationshipElement(
-        reader_and_setter.first,
-        reader_and_setter.second,
         reader_and_setter.extensions,
         reader_and_setter.category,
         reader_and_setter.id_short,
@@ -14246,7 +14234,9 @@ def _read_relationship_element_as_sequence(
         reader_and_setter.semantic_id,
         reader_and_setter.supplemental_semantic_ids,
         reader_and_setter.qualifiers,
-        reader_and_setter.embedded_data_specifications
+        reader_and_setter.embedded_data_specifications,
+        reader_and_setter.first,
+        reader_and_setter.second
     )
 
 
@@ -18284,13 +18274,7 @@ def _read_blob_as_sequence(
             exception.path._prepend(ElementSegment(next_element))
             raise
 
-    if reader_and_setter.content_type is None:
-        raise DeserializationException(
-            "The required property 'contentType' is missing"
-        )
-
     return aas_types.Blob(
-        reader_and_setter.content_type,
         reader_and_setter.extensions,
         reader_and_setter.category,
         reader_and_setter.id_short,
@@ -18300,7 +18284,8 @@ def _read_blob_as_sequence(
         reader_and_setter.supplemental_semantic_ids,
         reader_and_setter.qualifiers,
         reader_and_setter.embedded_data_specifications,
-        reader_and_setter.value
+        reader_and_setter.value,
+        reader_and_setter.content_type
     )
 
 
@@ -18831,13 +18816,7 @@ def _read_file_as_sequence(
             exception.path._prepend(ElementSegment(next_element))
             raise
 
-    if reader_and_setter.content_type is None:
-        raise DeserializationException(
-            "The required property 'contentType' is missing"
-        )
-
     return aas_types.File(
-        reader_and_setter.content_type,
         reader_and_setter.extensions,
         reader_and_setter.category,
         reader_and_setter.id_short,
@@ -18847,7 +18826,8 @@ def _read_file_as_sequence(
         reader_and_setter.supplemental_semantic_ids,
         reader_and_setter.qualifiers,
         reader_and_setter.embedded_data_specifications,
-        reader_and_setter.value
+        reader_and_setter.value,
+        reader_and_setter.content_type
     )
 
 
@@ -19433,19 +19413,7 @@ def _read_annotated_relationship_element_as_sequence(
             exception.path._prepend(ElementSegment(next_element))
             raise
 
-    if reader_and_setter.first is None:
-        raise DeserializationException(
-            "The required property 'first' is missing"
-        )
-
-    if reader_and_setter.second is None:
-        raise DeserializationException(
-            "The required property 'second' is missing"
-        )
-
     return aas_types.AnnotatedRelationshipElement(
-        reader_and_setter.first,
-        reader_and_setter.second,
         reader_and_setter.extensions,
         reader_and_setter.category,
         reader_and_setter.id_short,
@@ -19455,6 +19423,8 @@ def _read_annotated_relationship_element_as_sequence(
         reader_and_setter.supplemental_semantic_ids,
         reader_and_setter.qualifiers,
         reader_and_setter.embedded_data_specifications,
+        reader_and_setter.first,
+        reader_and_setter.second,
         reader_and_setter.annotations
     )
 
@@ -20095,11 +20065,6 @@ def _read_entity_as_sequence(
         except DeserializationException as exception:
             exception.path._prepend(ElementSegment(next_element))
             raise
-
-    if reader_and_setter.entity_type is None:
-        raise DeserializationException(
-            "The required property 'entityType' is missing"
-        )
 
     return aas_types.Entity(
         reader_and_setter.entity_type,
@@ -24234,22 +24199,8 @@ class _ReaderAndSetterForEmbeddedDataSpecification:
 
     def __init__(self) -> None:
         """Initialize with all the properties unset."""
-        self.data_specification: Optional[aas_types.Reference] = None
         self.data_specification_content: Optional[aas_types.DataSpecificationContent] = None
-
-    def read_and_set_data_specification(
-        self,
-        element: Element,
-        iterator: Iterator[Tuple[str, Element]]
-    ) -> None:
-        """
-        Read :paramref:`element` as the property
-        :py:attr:`.types.EmbeddedDataSpecification.data_specification` and set it.
-        """
-        self.data_specification = _read_reference_as_sequence(
-            element,
-            iterator
-        )
+        self.data_specification: Optional[aas_types.Reference] = None
 
     def read_and_set_data_specification_content(
         self,
@@ -24287,6 +24238,20 @@ class _ReaderAndSetterForEmbeddedDataSpecification:
         _read_end_element(element, iterator)
 
         self.data_specification_content = result
+
+    def read_and_set_data_specification(
+        self,
+        element: Element,
+        iterator: Iterator[Tuple[str, Element]]
+    ) -> None:
+        """
+        Read :paramref:`element` as the property
+        :py:attr:`.types.EmbeddedDataSpecification.data_specification` and set it.
+        """
+        self.data_specification = _read_reference_as_sequence(
+            element,
+            iterator
+        )
 
 
 def _read_embedded_data_specification_as_sequence(
@@ -24367,19 +24332,19 @@ def _read_embedded_data_specification_as_sequence(
             exception.path._prepend(ElementSegment(next_element))
             raise
 
-    if reader_and_setter.data_specification is None:
-        raise DeserializationException(
-            "The required property 'dataSpecification' is missing"
-        )
-
     if reader_and_setter.data_specification_content is None:
         raise DeserializationException(
             "The required property 'dataSpecificationContent' is missing"
         )
 
+    if reader_and_setter.data_specification is None:
+        raise DeserializationException(
+            "The required property 'dataSpecification' is missing"
+        )
+
     return aas_types.EmbeddedDataSpecification(
-        reader_and_setter.data_specification,
-        reader_and_setter.data_specification_content
+        reader_and_setter.data_specification_content,
+        reader_and_setter.data_specification
     )
 
 
@@ -24780,11 +24745,6 @@ def _read_value_reference_pair_as_sequence(
     if reader_and_setter.value is None:
         raise DeserializationException(
             "The required property 'value' is missing"
-        )
-
-    if reader_and_setter.value_id is None:
-        raise DeserializationException(
-            "The required property 'valueId' is missing"
         )
 
     return aas_types.ValueReferencePair(
@@ -27295,10 +27255,10 @@ _READ_AND_SET_DISPATCH_FOR_EMBEDDED_DATA_SPECIFICATION: Mapping[
         None
     ]
 ] = {
-    'dataSpecification':
-        _ReaderAndSetterForEmbeddedDataSpecification.read_and_set_data_specification,
     'dataSpecificationContent':
         _ReaderAndSetterForEmbeddedDataSpecification.read_and_set_data_specification_content,
+    'dataSpecification':
+        _ReaderAndSetterForEmbeddedDataSpecification.read_and_set_data_specification,
 }
 
 
@@ -28545,17 +28505,19 @@ class _Serializer(aas_types.AbstractVisitor):
                     self.visit(yet_yet_yet_yet_another_item)
                 self._write_end_element('embeddedDataSpecifications')
 
-        self._write_start_element('first')
-        self._write_reference_as_sequence(
-            that.first
-        )
-        self._write_end_element('first')
+        if that.first is not None:
+            self._write_start_element('first')
+            self._write_reference_as_sequence(
+                that.first
+            )
+            self._write_end_element('first')
 
-        self._write_start_element('second')
-        self._write_reference_as_sequence(
-            that.second
-        )
-        self._write_end_element('second')
+        if that.second is not None:
+            self._write_start_element('second')
+            self._write_reference_as_sequence(
+                that.second
+            )
+            self._write_end_element('second')
 
     def visit_relationship_element(
         self,
@@ -28569,11 +28531,30 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
-        self._write_start_element('relationshipElement')
-        self._write_relationship_element_as_sequence(
-            that
-        )
-        self._write_end_element('relationshipElement')
+        # We optimize for the case where all the optional properties are not set,
+        # so that we can simply output an empty element.
+        if (
+                that.extensions is None
+                and that.category is None
+                and that.id_short is None
+                and that.display_name is None
+                and that.description is None
+                and that.semantic_id is None
+                and that.supplemental_semantic_ids is None
+                and that.qualifiers is None
+                and that.embedded_data_specifications is None
+                and that.first is None
+                and that.second is None
+        ):
+            self._write_empty_element(
+                'relationshipElement'
+            )
+        else:
+            self._write_start_element('relationshipElement')
+            self._write_relationship_element_as_sequence(
+                that
+            )
+            self._write_end_element('relationshipElement')
 
     def _write_submodel_element_list_as_sequence(
         self,
@@ -29446,10 +29427,11 @@ class _Serializer(aas_types.AbstractVisitor):
                 that.value
             )
 
-        self._write_str_property(
-            'contentType',
-            that.content_type
-        )
+        if that.content_type is not None:
+            self._write_str_property(
+                'contentType',
+                that.content_type
+            )
 
     def visit_blob(
         self,
@@ -29463,11 +29445,30 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
-        self._write_start_element('blob')
-        self._write_blob_as_sequence(
-            that
-        )
-        self._write_end_element('blob')
+        # We optimize for the case where all the optional properties are not set,
+        # so that we can simply output an empty element.
+        if (
+                that.extensions is None
+                and that.category is None
+                and that.id_short is None
+                and that.display_name is None
+                and that.description is None
+                and that.semantic_id is None
+                and that.supplemental_semantic_ids is None
+                and that.qualifiers is None
+                and that.embedded_data_specifications is None
+                and that.value is None
+                and that.content_type is None
+        ):
+            self._write_empty_element(
+                'blob'
+            )
+        else:
+            self._write_start_element('blob')
+            self._write_blob_as_sequence(
+                that
+            )
+            self._write_end_element('blob')
 
     def _write_file_as_sequence(
         self,
@@ -29561,10 +29562,11 @@ class _Serializer(aas_types.AbstractVisitor):
                 that.value
             )
 
-        self._write_str_property(
-            'contentType',
-            that.content_type
-        )
+        if that.content_type is not None:
+            self._write_str_property(
+                'contentType',
+                that.content_type
+            )
 
     def visit_file(
         self,
@@ -29578,11 +29580,30 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
-        self._write_start_element('file')
-        self._write_file_as_sequence(
-            that
-        )
-        self._write_end_element('file')
+        # We optimize for the case where all the optional properties are not set,
+        # so that we can simply output an empty element.
+        if (
+                that.extensions is None
+                and that.category is None
+                and that.id_short is None
+                and that.display_name is None
+                and that.description is None
+                and that.semantic_id is None
+                and that.supplemental_semantic_ids is None
+                and that.qualifiers is None
+                and that.embedded_data_specifications is None
+                and that.value is None
+                and that.content_type is None
+        ):
+            self._write_empty_element(
+                'file'
+            )
+        else:
+            self._write_start_element('file')
+            self._write_file_as_sequence(
+                that
+            )
+            self._write_end_element('file')
 
     def _write_annotated_relationship_element_as_sequence(
         self,
@@ -29670,17 +29691,19 @@ class _Serializer(aas_types.AbstractVisitor):
                     self.visit(yet_yet_yet_yet_another_item)
                 self._write_end_element('embeddedDataSpecifications')
 
-        self._write_start_element('first')
-        self._write_reference_as_sequence(
-            that.first
-        )
-        self._write_end_element('first')
+        if that.first is not None:
+            self._write_start_element('first')
+            self._write_reference_as_sequence(
+                that.first
+            )
+            self._write_end_element('first')
 
-        self._write_start_element('second')
-        self._write_reference_as_sequence(
-            that.second
-        )
-        self._write_end_element('second')
+        if that.second is not None:
+            self._write_start_element('second')
+            self._write_reference_as_sequence(
+                that.second
+            )
+            self._write_end_element('second')
 
         if that.annotations is not None:
             if len(that.annotations) == 0:
@@ -29703,11 +29726,31 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
-        self._write_start_element('annotatedRelationshipElement')
-        self._write_annotated_relationship_element_as_sequence(
-            that
-        )
-        self._write_end_element('annotatedRelationshipElement')
+        # We optimize for the case where all the optional properties are not set,
+        # so that we can simply output an empty element.
+        if (
+                that.extensions is None
+                and that.category is None
+                and that.id_short is None
+                and that.display_name is None
+                and that.description is None
+                and that.semantic_id is None
+                and that.supplemental_semantic_ids is None
+                and that.qualifiers is None
+                and that.embedded_data_specifications is None
+                and that.first is None
+                and that.second is None
+                and that.annotations is None
+        ):
+            self._write_empty_element(
+                'annotatedRelationshipElement'
+            )
+        else:
+            self._write_start_element('annotatedRelationshipElement')
+            self._write_annotated_relationship_element_as_sequence(
+                that
+            )
+            self._write_end_element('annotatedRelationshipElement')
 
     def _write_entity_as_sequence(
         self,
@@ -29804,10 +29847,11 @@ class _Serializer(aas_types.AbstractVisitor):
                     self.visit(yet_yet_yet_yet_yet_another_item)
                 self._write_end_element('statements')
 
-        self._write_str_property(
-            'entityType',
-            that.entity_type.value
-        )
+        if that.entity_type is not None:
+            self._write_str_property(
+                'entityType',
+                that.entity_type.value
+            )
 
         if that.global_asset_id is not None:
             self._write_str_property(
@@ -29836,11 +29880,32 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
-        self._write_start_element('entity')
-        self._write_entity_as_sequence(
-            that
-        )
-        self._write_end_element('entity')
+        # We optimize for the case where all the optional properties are not set,
+        # so that we can simply output an empty element.
+        if (
+                that.extensions is None
+                and that.category is None
+                and that.id_short is None
+                and that.display_name is None
+                and that.description is None
+                and that.semantic_id is None
+                and that.supplemental_semantic_ids is None
+                and that.qualifiers is None
+                and that.embedded_data_specifications is None
+                and that.statements is None
+                and that.entity_type is None
+                and that.global_asset_id is None
+                and that.specific_asset_ids is None
+        ):
+            self._write_empty_element(
+                'entity'
+            )
+        else:
+            self._write_start_element('entity')
+            self._write_entity_as_sequence(
+                that
+            )
+            self._write_end_element('entity')
 
     def _write_event_payload_as_sequence(
         self,
@@ -30751,15 +30816,15 @@ class _Serializer(aas_types.AbstractVisitor):
 
         :param that: instance to be serialized
         """
+        self._write_start_element('dataSpecificationContent')
+        self.visit(that.data_specification_content)
+        self._write_end_element('dataSpecificationContent')
+
         self._write_start_element('dataSpecification')
         self._write_reference_as_sequence(
             that.data_specification
         )
         self._write_end_element('dataSpecification')
-
-        self._write_start_element('dataSpecificationContent')
-        self.visit(that.data_specification_content)
-        self._write_end_element('dataSpecificationContent')
 
     def visit_embedded_data_specification(
         self,
@@ -30848,11 +30913,12 @@ class _Serializer(aas_types.AbstractVisitor):
             that.value
         )
 
-        self._write_start_element('valueId')
-        self._write_reference_as_sequence(
-            that.value_id
-        )
-        self._write_end_element('valueId')
+        if that.value_id is not None:
+            self._write_start_element('valueId')
+            self._write_reference_as_sequence(
+                that.value_id
+            )
+            self._write_end_element('valueId')
 
     def visit_value_reference_pair(
         self,

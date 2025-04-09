@@ -16,11 +16,11 @@ with open(os.path.join(here, "README.rst"), encoding="utf-8") as fid:
     long_description = fid.read()
 
 setup(
-    name="aas-core3.0-testgen",
+    name="aas-core3.1-testgen",
     version="0.0.1",
-    description="Generate test data based on the meta-model V3.0.",
+    description="Generate test data based on the meta-model V3.1.",
     long_description=long_description,
-    url="https://github.com/aas-core-works/aas-core3.0-testgen",
+    url="https://github.com/aas-core-works/aas-core3.1-testgen",
     author="Marko Ristin",
     author_email="marko@ristin.ch",
     classifiers=[
@@ -37,7 +37,7 @@ setup(
         "icontract>=2.5.2,<3",
         "networkx==2.8",
         "typing-extensions==4.5.0",
-        "aas-core-codegen@git+https://github.com/aas-core-works/aas-core-codegen@4433d092#egg=aas-core-codegen",
+        "aas-core-codegen@git+https://github.com/aas-core-works/aas-core-codegen@e45fb6f#egg=aas-core-codegen",
     ],
     # fmt: off
     extras_require={
@@ -55,7 +55,7 @@ setup(
         ]
     },
     # fmt: on
-    py_modules=["aas_core3_0_testgen"],
-    package_data={"aas_core3_0_testgen": ["py.typed"]},
+    py_modules=["aas_core3_1_testgen"],
+    package_data={"aas_core3_1_testgen": ["py.typed"]},
     data_files=[(".", ["LICENSE", "README.rst"])],
 )

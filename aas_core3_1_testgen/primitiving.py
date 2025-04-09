@@ -4,8 +4,8 @@ from typing import Optional, TypeVar, Sequence, List
 
 from icontract import ensure
 
-from aas_core3_0_testgen import common
-from aas_core3_0_testgen.frozen_examples import pattern as frozen_examples_pattern
+from aas_core3_1_testgen import common
+from aas_core3_1_testgen.frozen_examples import pattern as frozen_examples_pattern
 
 
 def generate_bool(path_hash: common.CanHash) -> bool:

@@ -98,7 +98,7 @@ def main() -> int:
     if Step.REFORMAT in selects and Step.REFORMAT not in skips:
         print("Re-formatting...")
         reformat_targets = [
-            "aas_core3_0_testgen",
+            "aas_core3_1_testgen",
             "continuous_integration",
             "dev_scripts",
             "tests",
@@ -126,7 +126,7 @@ def main() -> int:
     if Step.MYPY in selects and Step.MYPY not in skips:
         print("Mypy'ing...")
         mypy_targets = [
-            "aas_core3_0_testgen",
+            "aas_core3_1_testgen",
             "tests",
             "continuous_integration",
             "dev_scripts",
@@ -146,7 +146,7 @@ def main() -> int:
     if Step.PYLINT in selects and Step.PYLINT not in skips:
         print("Pylint'ing...")
         pylint_targets = [
-            "aas_core3_0_testgen",
+            "aas_core3_1_testgen",
             "tests",
             "continuous_integration",
             "dev_scripts",
@@ -174,7 +174,7 @@ def main() -> int:
                 "coverage",
                 "run",
                 "--source",
-                "aas_core3_0_testgen",
+                "aas_core3_1_testgen",
                 "-m",
                 "unittest",
                 "discover",
@@ -208,7 +208,7 @@ def main() -> int:
         if exit_code != 0:
             return 1
 
-        for pth in (repo_root / "aas_core3_0_testgen").glob("**/*.py"):
+        for pth in (repo_root / "aas_core3_1_testgen").glob("**/*.py"):
             if pth.name == "__main__.py":
                 continue
 
@@ -231,9 +231,9 @@ def main() -> int:
         Step.CHECK_INIT_AND_SETUP_COINCIDE in selects
         and Step.CHECK_INIT_AND_SETUP_COINCIDE not in skips
     ):
-        print("Checking that aas_core3_0_testgen/__init__.py and setup.py coincide...")
+        print("Checking that aas_core3_1_testgen/__init__.py and setup.py coincide...")
         exit_code = call_and_report(
-            verb="check that aas_core3_0_testgen/__init__.py and setup.py coincide",
+            verb="check that aas_core3_1_testgen/__init__.py and setup.py coincide",
             cmd=[
                 sys.executable,
                 "continuous_integration/check_init_and_setup_coincide.py",
@@ -244,7 +244,7 @@ def main() -> int:
             return 1
     else:
         print(
-            "Skipped checking that aas_core3_0_testgen/__init__.py and "
+            "Skipped checking that aas_core3_1_testgen/__init__.py and "
             "setup.py coincide."
         )
 

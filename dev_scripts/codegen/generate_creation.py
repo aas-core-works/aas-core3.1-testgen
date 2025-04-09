@@ -18,7 +18,7 @@ from aas_core_codegen.python import common as python_common, naming as python_na
 from aas_core_codegen.python.common import INDENT as I, INDENT2 as II, INDENT3 as III
 from icontract import ensure, require
 
-import aas_core3_0_testgen.common
+import aas_core3_1_testgen.common
 
 import dev_scripts.codegen.common
 
@@ -1081,8 +1081,8 @@ from typing import (
 {I}Sequence
 )
 
-from aas_core3_0_testgen import common
-from aas_core3_0_testgen import primitiving
+from aas_core3_1_testgen import common
+from aas_core3_1_testgen import primitiving
 from aas_core3 import types as aas_types"""
         ),
     ]  # type: List[Stripped]
@@ -1178,7 +1178,7 @@ def generate_and_write(
     """Generate the code and write it to the pre-defined file."""
     # fmt: off
     symbol_table, constraints_by_class = (
-        aas_core3_0_testgen.common.load_symbol_table_and_infer_constraints_for_schema(
+        aas_core3_1_testgen.common.load_symbol_table_and_infer_constraints_for_schema(
             model_path=model_path
         )
     )
@@ -1205,7 +1205,7 @@ def main() -> int:
     parser.add_argument(
         "--codegened_dir",
         help="path to the directory containing the generated code",
-        default=str(repo_dir / "aas_core3_0_testgen" / "codegened"),
+        default=str(repo_dir / "aas_core3_1_testgen" / "codegened"),
     )
     args = parser.parse_args()
 

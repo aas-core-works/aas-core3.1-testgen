@@ -15,8 +15,8 @@ Create instances wrapped in environment.
 
 from typing import Callable, List, Tuple, Union
 
-from aas_core3_0_testgen import common
-from aas_core3_0_testgen.codegened import creation
+from aas_core3_1_testgen import common
+from aas_core3_1_testgen.codegened import creation
 from aas_core3 import types as aas_types
 
 

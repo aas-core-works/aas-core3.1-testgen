@@ -241,7 +241,7 @@ def _generate_code(our_repo: pathlib.Path) -> Optional[int]:
             "--model_path",
             str(pathlib.Path(aas_core_meta.v3.__file__).relative_to(our_repo)),
             "--codegened_dir",
-            "aas_core3_0_testgen/codegened",
+            "aas_core3_1_testgen/codegened",
         ]
         for pth in scripts
     ]  # type: Sequence[Sequence[str]]
@@ -361,7 +361,7 @@ def _generate_test_data(our_repo: pathlib.Path) -> Optional[int]:
     shutil.rmtree(test_data_dir / "Xml")
 
     scripts = [
-        our_repo / "aas_core3_0_testgen" / name
+        our_repo / "aas_core3_1_testgen" / name
         for name in ("generate_json.py", "generate_rdf.py", "generate_xml.py")
     ]
 

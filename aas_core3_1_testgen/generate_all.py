@@ -4,9 +4,9 @@ import argparse
 import pathlib
 import sys
 
-import aas_core3_0_testgen.generate_json
-import aas_core3_0_testgen.generate_rdf
-import aas_core3_0_testgen.generate_xml
+import aas_core3_1_testgen.generate_json
+import aas_core3_1_testgen.generate_rdf
+import aas_core3_1_testgen.generate_xml
 
 
 def main() -> int:
@@ -23,13 +23,13 @@ def main() -> int:
     model_path = pathlib.Path(args.model_path)
     test_data_dir = pathlib.Path(args.test_data_dir)
 
-    aas_core3_0_testgen.generate_json.generate(
+    aas_core3_1_testgen.generate_json.generate(
         model_path=model_path, test_data_dir=test_data_dir
     )
-    aas_core3_0_testgen.generate_rdf.generate(
+    aas_core3_1_testgen.generate_rdf.generate(
         model_path=model_path, test_data_dir=test_data_dir
     )
-    aas_core3_0_testgen.generate_xml.generate(
+    aas_core3_1_testgen.generate_xml.generate(
         model_path=model_path, test_data_dir=test_data_dir
     )
 

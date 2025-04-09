@@ -5,7 +5,7 @@
 # Do NOT edit or append!
 
 
-from aas_core3_0_testgen import common
+from aas_core3_1_testgen import common
 from aas_core3 import types as aas_types
 
 
