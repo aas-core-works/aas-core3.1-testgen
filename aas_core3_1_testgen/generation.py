@@ -21,9 +21,9 @@ from typing_extensions import assert_never
 
 import aas_core3.constants as aas_constants
 import aas_core3.types as aas_types
-from aas_core3_0_testgen import fixing, common, primitiving
-from aas_core3_0_testgen.codegened import creation, wrapping, preserialization
-from aas_core3_0_testgen.frozen_examples import (
+from aas_core3_1_testgen import fixing, common, primitiving
+from aas_core3_1_testgen.codegened import creation, wrapping, preserialization
+from aas_core3_1_testgen.frozen_examples import (
     pattern as frozen_examples_pattern,
     xs_value as frozen_examples_xs_value,
 )

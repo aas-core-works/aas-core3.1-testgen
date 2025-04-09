@@ -19,8 +19,8 @@ from aas_core_codegen import intermediate
 from aas_core_codegen.common import Identifier, Stripped
 from icontract import ensure, require
 
-from aas_core3_0_testgen import common, generation
-from aas_core3_0_testgen.codegened import preserialization
+from aas_core3_1_testgen import common, generation
+from aas_core3_1_testgen.codegened import preserialization
 
 _INDENT = "    "
 

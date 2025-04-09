@@ -8,7 +8,7 @@ from typing import List, Tuple
 
 import aas_core_meta.v3
 
-import aas_core3_0_testgen.generate_rdf
+import aas_core3_1_testgen.generate_rdf
 
 
 class Test_against_recorded(unittest.TestCase):
@@ -16,7 +16,7 @@ class Test_against_recorded(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir_as_str:
             tmp_dir = pathlib.Path(tmp_dir_as_str)
 
-            aas_core3_0_testgen.generate_rdf.generate(
+            aas_core3_1_testgen.generate_rdf.generate(
                 model_path=pathlib.Path(aas_core_meta.v3.__file__),
                 test_data_dir=tmp_dir,
             )

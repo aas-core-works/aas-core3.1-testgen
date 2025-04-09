@@ -12,7 +12,7 @@ from typing import Mapping, MutableMapping, List
 
 from aas_core_codegen import intermediate, infer_for_schema
 
-from aas_core3_0_testgen.frozen_examples._types import Examples
+from aas_core3_1_testgen.frozen_examples._types import Examples
 
 # noinspection SpellCheckingInspection
 
@@ -418,6 +418,53 @@ BY_PATTERN: Mapping[str, Examples] = collections.OrderedDict(
                         ("negatively_fuzzed_08", "øPí"),
                         ("negatively_fuzzed_09", "pÜ\U00083bcb®AÇ"),
                         ("negatively_fuzzed_10", "\U000f15c8\x0b~û\x95\U000d64c4"),
+                    ]
+                ),
+            ),
+        ),
+        # RFC 2396
+        (
+            "^([a-zA-Z][a-zA-Z0-9+\-.]*:((//((((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[;:&=+$,])*@)?((([a-zA-Z0-9]|[a-zA-Z0-9]([a-zA-Z0-9]|-)*[a-zA-Z0-9])\.)*([a-zA-Z]|[a-zA-Z]([a-zA-Z0-9]|-)*[a-zA-Z0-9])(\.)?|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)(:[0-9]*)?)?|(([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[$,;:@&=+])+)(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*)*)?|/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*)*)(\?(([;/?:@&=+$,]|([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])))*)?|(([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[;?:@&=+$,])(([;/?:@&=+$,]|([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])))*)|(//((((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[;:&=+$,])*@)?((([a-zA-Z0-9]|[a-zA-Z0-9]([a-zA-Z0-9]|-)*[a-zA-Z0-9])\.)*([a-zA-Z]|[a-zA-Z]([a-zA-Z0-9]|-)*[a-zA-Z0-9])(\.)?|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)(:[0-9]*)?)?|(([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[$,;:@&=+])+)(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*)*)?|/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*)*|(([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[;@&=+$,])+(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*(/((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*(;((([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])|[:@&=+$,]))*)*)*)?)(\?(([;/?:@&=+$,]|([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])))*)?)?(\#(([;/?:@&=+$,]|([a-zA-Z0-9]|[\-_.!~*'()])|%([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])))*)?$:",
+            Examples(
+                positives=collections.OrderedDict(
+                    [
+                        ('fuzzed_01', '#%4b%6AT'),
+                        ('fuzzed_02', "RqjJsrvAJ1Uk:%9d'%8C_%81k,%Fcd?yw,@B,M=.EE%8E"),
+                        ('fuzzed_03', '#/%38%21&'),
+                        ('fuzzed_04', '//QQ%BF(,xe;A.@%94($,=%38@'),
+                        ('fuzzed_05',
+                         '/;=:&%30%1a;77@%321%A4%21;%FC:=/;=,=%13y:%2D;+J%c6%bcU%D3;j1G:sg=%EcA%f3/@z%29%B7&B;=#@H%8D=U%FE%5e%22%Db?,+'),
+                        ('fuzzed_06', '#;'),
+                        ('fuzzed_07', '#%6A%6AT'),
+                        ('fuzzed_08',
+                         '//bVfwa.f./%DC%60O@=;;%63;6%9b;l%E8Ib@$e::9%c0;w%0F;P%bD!v,$;@$;,=$%454-:R%2C%5E%4b2B=%eB%Da%0E%C4p%5c&;%de@%82%fB;v%bbw5q=%57%EE%1c;%e0%2A%af%1c0%eDm%5c%D2&;k*%12%5B;%A0&,:&$;:&%33;+,;%6c5;l%1D%35+%4a&%Fe+lk,+;C,~W=+=%3bn;;-p%3f%66R+%53;o%Bd$BIW%0d%Be%0E+l=I(k%Ac:,R%e6%9E%21%7f%54;;N%F3X@%8f%03%AE(=%9b:/;%F20;0L%27%4F;;%b0:9;%D5%31%1C;21u@%CE%fAE@$=#T%7D'),
+                        ('fuzzed_09',
+                         'q2t2uv://777646689268.160810318.01435447069935.47:/%Be/%04@%Cd@P%dc:C$&~x=;%3f9+;;sr-i=p,///;%D5@@x&;V@I%16/+;%e4,@%AA@Ih:%8Dg=%F8P,v%dE%3E%03%62%FB=$R,&%ac%71;u%11l8*;,;$%Faj:;;;%ee$%8b%EC@%4Alo;t,%0b%eB%D5%EA:%De;$$1:@/%8e%0D&9%C8M;@5%28%4E%BC@%34;;@%EC=tL)x(/M%D3%aF&%Ec;=%aa$$j;;%B3@hk=e:%DB%24Z;%F6%9E+%8e;=;%ba;;%b3;;p%f11=%34%c0;#lR:+k%BE4%EB'),
+                        ('fuzzed_10', '#%59T=%e1&&%b4%53EYU?,/q%87%c6He'),
+                        ('made_up_01', 'http://www.example.org'),
+                        ('made_up_02', 'ftp://ftp.is.co.za/rfc/rfc1808.txt'),
+                        ('made_up_03', 'mailto:John.Doe@example.org'),
+                        ('made_up_04', 'news:comp.infosystems.www.servers.unix'),
+                        ('made_up_05', 'telnet://192.0.2.16:80/'),
+                    ]
+                ),
+                negatives=collections.OrderedDict(
+                    [
+                        ('negatively_fuzzed_01', '\U0004afa4'),
+                        ('negatively_fuzzed_02', '\U000ddeaeꨁ'),
+                        ('negatively_fuzzed_03', 'çö'),
+                        ('negatively_fuzzed_04', '_\x18å¢\x84z|\x9d\U0010c28b\U0006255e\U000fe561i\U000d2b21-\x81'),
+                        ('negatively_fuzzed_05', '\x86䀣\U000165c5'),
+                        ('negatively_fuzzed_06', '\U000ddeaeꨁ\U0006990a'),
+                        ('negatively_fuzzed_07', 'ࠁࠁ\x7f𦊩'),
+                        ('negatively_fuzzed_08', '\ue140P\x81Kâ'),
+                        ('negatively_fuzzed_09', 'ð"u'),
+                        ('negatively_fuzzed_10', '00𐀇'),
+                        ('negatively_made_up_01', 'http://'),  # Missing host
+                        ('negatively_made_up_02', 'http:///example.org'),  # Too many slashes
+                        ('negatively_made_up_03', 'http://exa mple.org'),  # Space in URI
+                        ('negatively_made_up_04', 'http://example.org:port'),  # Non-numeric port
+                        ('negatively_made_up_05', '://example.org'),  # Missing scheme
                     ]
                 ),
             ),

@@ -2777,19 +2777,7 @@ def _relationship_element_from_jsonable_without_dispatch(
             )
             raise exception
 
-    if setter.first is None:
-        raise DeserializationException(
-            "The required property 'first' is missing"
-        )
-
-    if setter.second is None:
-        raise DeserializationException(
-            "The required property 'second' is missing"
-        )
-
     return aas_types.RelationshipElement(
-        setter.first,
-        setter.second,
         setter.extensions,
         setter.category,
         setter.id_short,
@@ -2798,7 +2786,9 @@ def _relationship_element_from_jsonable_without_dispatch(
         setter.semantic_id,
         setter.supplemental_semantic_ids,
         setter.qualifiers,
-        setter.embedded_data_specifications
+        setter.embedded_data_specifications,
+        setter.first,
+        setter.second
     )
 
 
@@ -5554,13 +5544,7 @@ def blob_from_jsonable(
             )
             raise exception
 
-    if setter.content_type is None:
-        raise DeserializationException(
-            "The required property 'contentType' is missing"
-        )
-
     return aas_types.Blob(
-        setter.content_type,
         setter.extensions,
         setter.category,
         setter.id_short,
@@ -5570,7 +5554,8 @@ def blob_from_jsonable(
         setter.supplemental_semantic_ids,
         setter.qualifiers,
         setter.embedded_data_specifications,
-        setter.value
+        setter.value,
+        setter.content_type
     )
 
 
@@ -5927,13 +5912,7 @@ def file_from_jsonable(
             )
             raise exception
 
-    if setter.content_type is None:
-        raise DeserializationException(
-            "The required property 'contentType' is missing"
-        )
-
     return aas_types.File(
-        setter.content_type,
         setter.extensions,
         setter.category,
         setter.id_short,
@@ -5943,7 +5922,8 @@ def file_from_jsonable(
         setter.supplemental_semantic_ids,
         setter.qualifiers,
         setter.embedded_data_specifications,
-        setter.value
+        setter.value,
+        setter.content_type
     )
 
 
@@ -6337,19 +6317,7 @@ def annotated_relationship_element_from_jsonable(
             )
             raise exception
 
-    if setter.first is None:
-        raise DeserializationException(
-            "The required property 'first' is missing"
-        )
-
-    if setter.second is None:
-        raise DeserializationException(
-            "The required property 'second' is missing"
-        )
-
     return aas_types.AnnotatedRelationshipElement(
-        setter.first,
-        setter.second,
         setter.extensions,
         setter.category,
         setter.id_short,
@@ -6359,6 +6327,8 @@ def annotated_relationship_element_from_jsonable(
         setter.supplemental_semantic_ids,
         setter.qualifiers,
         setter.embedded_data_specifications,
+        setter.first,
+        setter.second,
         setter.annotations
     )
 
@@ -6789,11 +6759,6 @@ def entity_from_jsonable(
                 )
             )
             raise exception
-
-    if setter.entity_type is None:
-        raise DeserializationException(
-            "The required property 'entityType' is missing"
-        )
 
     return aas_types.Entity(
         setter.entity_type,
@@ -9502,25 +9467,12 @@ class _SetterForEmbeddedDataSpecification:
 
     def __init__(self) -> None:
         """Initialize with all the properties unset."""
-        self.data_specification: Optional[aas_types.Reference] = None
         self.data_specification_content: Optional[aas_types.DataSpecificationContent] = None
+        self.data_specification: Optional[aas_types.Reference] = None
 
     def ignore(self, jsonable: Jsonable) -> None:
         """Ignore :paramref:`jsonable` and do not set anything."""
         pass
-
-    def set_data_specification_from_jsonable(
-            self,
-            jsonable: Jsonable
-    ) -> None:
-        """
-        Parse :paramref:`jsonable` as the value of :py:attr:`~data_specification`.
-
-        :param jsonable: input to be parsed
-        """
-        self.data_specification = reference_from_jsonable(
-            jsonable
-        )
 
     def set_data_specification_content_from_jsonable(
             self,
@@ -9532,6 +9484,19 @@ class _SetterForEmbeddedDataSpecification:
         :param jsonable: input to be parsed
         """
         self.data_specification_content = data_specification_content_from_jsonable(
+            jsonable
+        )
+
+    def set_data_specification_from_jsonable(
+            self,
+            jsonable: Jsonable
+    ) -> None:
+        """
+        Parse :paramref:`jsonable` as the value of :py:attr:`~data_specification`.
+
+        :param jsonable: input to be parsed
+        """
+        self.data_specification = reference_from_jsonable(
             jsonable
         )
 
@@ -9574,19 +9539,19 @@ def embedded_data_specification_from_jsonable(
             )
             raise exception
 
-    if setter.data_specification is None:
-        raise DeserializationException(
-            "The required property 'dataSpecification' is missing"
-        )
-
     if setter.data_specification_content is None:
         raise DeserializationException(
             "The required property 'dataSpecificationContent' is missing"
         )
 
+    if setter.data_specification is None:
+        raise DeserializationException(
+            "The required property 'dataSpecification' is missing"
+        )
+
     return aas_types.EmbeddedDataSpecification(
-        setter.data_specification,
-        setter.data_specification_content
+        setter.data_specification_content,
+        setter.data_specification
     )
 
 
@@ -9829,11 +9794,6 @@ def value_reference_pair_from_jsonable(
     if setter.value is None:
         raise DeserializationException(
             "The required property 'value' is missing"
-        )
-
-    if setter.value_id is None:
-        raise DeserializationException(
-            "The required property 'valueId' is missing"
         )
 
     return aas_types.ValueReferencePair(
@@ -11610,10 +11570,10 @@ _SETTER_MAP_FOR_EMBEDDED_DATA_SPECIFICATION: Mapping[
         None
     ]
 ] = {
-    'dataSpecification':
-        _SetterForEmbeddedDataSpecification.set_data_specification_from_jsonable,
     'dataSpecificationContent':
         _SetterForEmbeddedDataSpecification.set_data_specification_content_from_jsonable,
+    'dataSpecification':
+        _SetterForEmbeddedDataSpecification.set_data_specification_from_jsonable,
     'modelType':
         _SetterForEmbeddedDataSpecification.ignore
 }
@@ -12115,9 +12075,11 @@ class _Serializer(
                 for item in that.embedded_data_specifications
             ]
 
-        jsonable['first'] = self.transform(that.first)
+        if that.first is not None:
+            jsonable['first'] = self.transform(that.first)
 
-        jsonable['second'] = self.transform(that.second)
+        if that.second is not None:
+            jsonable['second'] = self.transform(that.second)
 
         jsonable["modelType"] = 'RelationshipElement'
 
@@ -12567,7 +12529,8 @@ class _Serializer(
         if that.value is not None:
             jsonable['value'] = _bytes_to_base64_str(that.value)
 
-        jsonable['contentType'] = that.content_type
+        if that.content_type is not None:
+            jsonable['contentType'] = that.content_type
 
         jsonable["modelType"] = 'Blob'
 
@@ -12628,7 +12591,8 @@ class _Serializer(
         if that.value is not None:
             jsonable['value'] = that.value
 
-        jsonable['contentType'] = that.content_type
+        if that.content_type is not None:
+            jsonable['contentType'] = that.content_type
 
         jsonable["modelType"] = 'File'
 
@@ -12686,9 +12650,11 @@ class _Serializer(
                 for item in that.embedded_data_specifications
             ]
 
-        jsonable['first'] = self.transform(that.first)
+        if that.first is not None:
+            jsonable['first'] = self.transform(that.first)
 
-        jsonable['second'] = self.transform(that.second)
+        if that.second is not None:
+            jsonable['second'] = self.transform(that.second)
 
         if that.annotations is not None:
             jsonable['annotations'] = [
@@ -12758,7 +12724,8 @@ class _Serializer(
                 for item in that.statements
             ]
 
-        jsonable['entityType'] = that.entity_type.value
+        if that.entity_type is not None:
+            jsonable['entityType'] = that.entity_type.value
 
         if that.global_asset_id is not None:
             jsonable['globalAssetId'] = that.global_asset_id
@@ -13174,12 +13141,12 @@ class _Serializer(
         """Serialize :paramref:`that` to a JSON-able representation."""
         jsonable: MutableMapping[str, MutableJsonable] = dict()
 
-        jsonable['dataSpecification'] = (
-            self.transform(that.data_specification)
-        )
-
         jsonable['dataSpecificationContent'] = (
             self.transform(that.data_specification_content)
+        )
+
+        jsonable['dataSpecification'] = (
+            self.transform(that.data_specification)
         )
 
         return jsonable
@@ -13211,7 +13178,8 @@ class _Serializer(
 
         jsonable['value'] = that.value
 
-        jsonable['valueId'] = self.transform(that.value_id)
+        if that.value_id is not None:
+            jsonable['valueId'] = self.transform(that.value_id)
 
         return jsonable
 

@@ -65,6 +65,7 @@ def qualifier_kind_from_str(
 _ASSET_KIND_FROM_STR: Mapping[str, aas_types.AssetKind] = {
     'Type': aas_types.AssetKind.TYPE,
     'Instance': aas_types.AssetKind.INSTANCE,
+    'Role': aas_types.AssetKind.ROLE,
     'NotApplicable': aas_types.AssetKind.NOT_APPLICABLE,
 }
 

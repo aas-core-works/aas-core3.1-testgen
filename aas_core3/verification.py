@@ -136,7 +136,7 @@ class Error:
 
 # noinspection SpellCheckingInspection
 def _construct_matches_id_short() -> Pattern[str]:
-    pattern = '^[a-zA-Z][a-zA-Z0-9_]*$'
+    pattern = '^[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9_]+$'
 
     return re.compile(pattern)
 
@@ -262,6 +262,68 @@ def matches_mime_type(text: str) -> bool:
         True if the :paramref:`text` conforms to the pattern
     """
     return _REGEX_MATCHES_MIME_TYPE.match(text) is not None
+
+
+# noinspection SpellCheckingInspection
+def _construct_matches_rfc_2396() -> Pattern[str]:
+    alphanum = '[a-zA-Z0-9]'
+    mark = "[-_.!~*'()]"
+    unreserved = f'({alphanum}|{mark})'
+    hex = '([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])'
+    escaped = f'%{hex}{hex}'
+    pchar = f'({unreserved}|{escaped}|[:@&=+$,])'
+    param = f'({pchar})*'
+    segment = f'({pchar})*(;{param})*'
+    path_segments = f'{segment}(/{segment})*'
+    abs_path = f'/{path_segments}'
+    scheme = '[a-zA-Z][a-zA-Z0-9+\\-.]*'
+    userinfo = f'({unreserved}|{escaped}|[;:&=+$,])*'
+    domainlabel = f'({alphanum}|{alphanum}({alphanum}|-)*{alphanum})'
+    toplabel = f'([a-zA-Z]|[a-zA-Z]({alphanum}|-)*{alphanum})'
+    hostname = f'({domainlabel}\\.)*{toplabel}(\\.)?'
+    ipv4address = '[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+'
+    host = f'({hostname}|{ipv4address})'
+    port = '[0-9]*'
+    hostport = f'{host}(:{port})?'
+    server = f'(({userinfo}@)?{hostport})?'
+    reg_name = f'({unreserved}|{escaped}|[$,;:@&=+])+'
+    authority = f'({server}|{reg_name})'
+    net_path = f'//{authority}({abs_path})?'
+    reserved = '[;/?:@&=+$,]'
+    uric = f'({reserved}|{unreserved}|{escaped})'
+    query = f'({uric})*'
+    hier_part = f'({net_path}|{abs_path})(\\?{query})?'
+    uric_no_slash = f'({unreserved}|{escaped}|[;?:@&=+$,])'
+    opaque_part = f'{uric_no_slash}({uric})*'
+    absoluteuri = f'{scheme}:({hier_part}|{opaque_part})'
+    fragment = f'({uric})*'
+    rel_segment = f'({unreserved}|{escaped}|[;@&=+$,])+'
+    rel_path = f'{rel_segment}({abs_path})?'
+    relativeuri = f'({net_path}|{abs_path}|{rel_path})(\\?{query})?'
+    uri_reference = f'^({absoluteuri}|{relativeuri})?(#{fragment})?$'
+
+    return re.compile(uri_reference)
+
+
+_REGEX_MATCHES_RFC_2396 = _construct_matches_rfc_2396()
+
+
+def matches_rfc_2396(text: str) -> bool:
+    """
+    Check that :paramref:`text` matches to the URI pattern defined in RFC 2396
+
+    The definition has been taken from:
+    https://datatracker.ietf.org/doc/html/rfc2396
+
+    Note that RFX 2396 alone is not enough for specifying ``xs:anyURI`` for
+    XSD version 1.0, as that specifies URI together with the amendment of
+    RFC 2732.
+
+    :param text: Text to be checked
+    :return:
+        True if the :paramref:`text` conforms to the pattern
+    """
+    return _REGEX_MATCHES_RFC_2396.match(text) is not None
 
 
 # noinspection SpellCheckingInspection
@@ -402,44 +464,48 @@ def matches_xml_serializable_string(text: str) -> bool:
 
 # noinspection SpellCheckingInspection
 def _construct_matches_xs_any_uri() -> Pattern[str]:
+    alphanum = '[a-zA-Z0-9]'
+    mark = "[-_.!~*'()]"
+    unreserved = f'({alphanum}|{mark})'
+    hex = '([0-9]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF]|[aA]|[bB]|[cC]|[dD]|[eE]|[fF])'
+    escaped = f'%{hex}{hex}'
+    pchar = f'({unreserved}|{escaped}|[:@&=+$,])'
+    param = f'({pchar})*'
+    segment = f'({pchar})*(;{param})*'
+    path_segments = f'{segment}(/{segment})*'
+    abs_path = f'/{path_segments}'
     scheme = '[a-zA-Z][a-zA-Z0-9+\\-.]*'
-    ucschar = '[\\xa0-\\ud7ff\\uf900-\\ufdcf\\ufdf0-\\uffef\\U00010000-\\U0001fffd\\U00020000-\\U0002fffd\\U00030000-\\U0003fffd\\U00040000-\\U0004fffd\\U00050000-\\U0005fffd\\U00060000-\\U0006fffd\\U00070000-\\U0007fffd\\U00080000-\\U0008fffd\\U00090000-\\U0009fffd\\U000a0000-\\U000afffd\\U000b0000-\\U000bfffd\\U000c0000-\\U000cfffd\\U000d0000-\\U000dfffd\\U000e1000-\\U000efffd]'
-    iunreserved = f'([a-zA-Z0-9\\-._~]|{ucschar})'
-    pct_encoded = '%[0-9A-Fa-f][0-9A-Fa-f]'
-    sub_delims = "[!$&'()*+,;=]"
-    iuserinfo = f'({iunreserved}|{pct_encoded}|{sub_delims}|:)*'
-    h16 = '[0-9A-Fa-f]{1,4}'
-    dec_octet = '([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])'
-    ipv4address = f'{dec_octet}\\.{dec_octet}\\.{dec_octet}\\.{dec_octet}'
-    ls32 = f'({h16}:{h16}|{ipv4address})'
-    ipv6address = f'(({h16}:){{6}}{ls32}|::({h16}:){{5}}{ls32}|({h16})?::({h16}:){{4}}{ls32}|(({h16}:)?{h16})?::({h16}:){{3}}{ls32}|(({h16}:){{0,2}}{h16})?::({h16}:){{2}}{ls32}|(({h16}:){{0,3}}{h16})?::{h16}:{ls32}|(({h16}:){{0,4}}{h16})?::{ls32}|(({h16}:){{0,5}}{h16})?::{h16}|(({h16}:){{0,6}}{h16})?::)'
-    unreserved = '[a-zA-Z0-9\\-._~]'
-    ipvfuture = f'[vV][0-9A-Fa-f]+\\.({unreserved}|{sub_delims}|:)+'
-    ip_literal = f'\\[({ipv6address}|{ipvfuture})\\]'
-    ireg_name = f'({iunreserved}|{pct_encoded}|{sub_delims})*'
-    ihost = f'({ip_literal}|{ipv4address}|{ireg_name})'
+    userinfo = f'({unreserved}|{escaped}|[;:&=+$,])*'
+    domainlabel = f'({alphanum}|{alphanum}({alphanum}|-)*{alphanum})'
+    toplabel = f'([a-zA-Z]|[a-zA-Z]({alphanum}|-)*{alphanum})'
+    hostname = f'({domainlabel}\\.)*{toplabel}(\\.)?'
+    ipv4address = '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}'
+    hex4 = '[0-9A-Fa-f]{1,4}'
+    hexseq = f'{hex4}(:{hex4})*'
+    hexpart = f'({hexseq}|{hexseq}::({hexseq})?|::({hexseq})?)'
+    ipv6address = f'{hexpart}(:{ipv4address})?'
+    ipv6reference = f'\\[{ipv6address}\\]'
+    host = f'({hostname}|{ipv4address}|{ipv6reference})'
     port = '[0-9]*'
-    iauthority = f'({iuserinfo}@)?{ihost}(:{port})?'
-    ipchar = f'({iunreserved}|{pct_encoded}|{sub_delims}|[:@])'
-    isegment = f'({ipchar})*'
-    ipath_abempty = f'(/{isegment})*'
-    isegment_nz = f'({ipchar})+'
-    ipath_absolute = f'/({isegment_nz}(/{isegment})*)?'
-    ipath_rootless = f'{isegment_nz}(/{isegment})*'
-    ipath_empty = f'({ipchar}){{0}}'
-    ihier_part = f'(//{iauthority}{ipath_abempty}|{ipath_absolute}|{ipath_rootless}|{ipath_empty})'
-    iprivate = '[\\ue000-\\uf8ff\\U000f0000-\\U000ffffd\\U00100000-\\U0010fffd]'
-    iquery = f'({ipchar}|{iprivate}|[/?])*'
-    ifragment = f'({ipchar}|[/?])*'
-    isegment_nz_nc = f'({iunreserved}|{pct_encoded}|{sub_delims}|@)+'
-    ipath_noscheme = f'{isegment_nz_nc}(/{isegment})*'
-    irelative_part = f'(//{iauthority}{ipath_abempty}|{ipath_absolute}|{ipath_noscheme}|{ipath_empty})'
-    irelative_ref = f'{irelative_part}(\\?{iquery})?(#{ifragment})?'
-    iri = f'{scheme}:{ihier_part}(\\?{iquery})?(#{ifragment})?'
-    iri_reference = f'({iri}|{irelative_ref})'
-    pattern = f'^{iri_reference}$'
+    hostport = f'{host}(:{port})?'
+    server = f'(({userinfo}@)?{hostport})?'
+    reg_name = f'({unreserved}|{escaped}|[$,;:@&=+])+'
+    authority = f'({server}|{reg_name})'
+    net_path = f'//{authority}({abs_path})?'
+    reserved = '[;/?:@&=+$,\\[\\]]'
+    uric = f'({reserved}|{unreserved}|{escaped})'
+    query = f'({uric})*'
+    hier_part = f'({net_path}|{abs_path})(\\?{query})?'
+    uric_no_slash = f'({unreserved}|{escaped}|[;?:@&=+$,])'
+    opaque_part = f'{uric_no_slash}({uric})*'
+    absoluteuri = f'{scheme}:({hier_part}|{opaque_part})'
+    fragment = f'({uric})*'
+    rel_segment = f'({unreserved}|{escaped}|[;@&=+$,])+'
+    rel_path = f'{rel_segment}({abs_path})?'
+    relativeuri = f'({net_path}|{abs_path}|{rel_path})(\\?{query})?'
+    uri_reference = f'^({absoluteuri}|{relativeuri})?(#{fragment})?$'
 
-    return re.compile(pattern)
+    return re.compile(uri_reference)
 
 
 _REGEX_MATCHES_XS_ANY_URI = _construct_matches_xs_any_uri()
@@ -450,7 +516,14 @@ def matches_xs_any_uri(text: str) -> bool:
     Check that :paramref:`text` conforms to the pattern of an ``xs:anyURI``.
 
     See: https://www.w3.org/TR/xmlschema-2/#anyURI and
-    https://datatracker.ietf.org/doc/html/rfc3987
+    https://datatracker.ietf.org/doc/html/rfc2396 and
+    https://datatracker.ietf.org/doc/html/rfc2732
+
+    Note, that version 1.0 of the XSD specification defines ``xs:anyURI`` as
+    "defined by RFC 2396, as amended by RFC 2732". Therefore, we use a
+    pattern here that implements the amendments of RFC 2732. This should not
+    be confused with ``matches_RFC_2396``, which does not include those
+    amendments and is used in different parts of the specification.
 
     :param text: Text to be checked
     :return:
@@ -3242,23 +3315,25 @@ class _Transformer(
                     )
                     yield error
 
-        for error in self.transform(that.first):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'first'
+        if that.first is not None:
+            for error in self.transform(that.first):
+                error.path._prepend(
+                    PropertySegment(
+                        that,
+                        'first'
+                    )
                 )
-            )
-            yield error
+                yield error
 
-        for error in self.transform(that.second):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'second'
+        if that.second is not None:
+            for error in self.transform(that.second):
+                error.path._prepend(
+                    PropertySegment(
+                        that,
+                        'second'
+                    )
                 )
-            )
-            yield error
+                yield error
 
     # noinspection PyMethodMayBeStatic
     def transform_submodel_element_list(
@@ -3426,21 +3501,21 @@ class _Transformer(
         if not (
             not (
                 (
-                    that.type_value_list_element == aas_types.AASSubmodelElements.PROPERTY
-                    or that.type_value_list_element == aas_types.AASSubmodelElements.RANGE
+                    (that.value is not None)
+                    and (
+                        (
+                            that.type_value_list_element == aas_types.AASSubmodelElements.PROPERTY
+                            or that.type_value_list_element == aas_types.AASSubmodelElements.RANGE
+                        )
+                    )
                 )
             )
             or (
                 (
                     (that.value_type_list_element is not None)
-                    and (
-                        (
-                            (that.value is None)
-                            or properties_or_ranges_have_value_type(
-                                that.value,
-                                that.value_type_list_element
-                            )
-                        )
+                    and properties_or_ranges_have_value_type(
+                        that.value,
+                        that.value_type_list_element
                     )
                 )
             )
@@ -3450,21 +3525,6 @@ class _Transformer(
                 'Property or Range value type list element shall be set and ' +
                 'all first level child elements shall have the value type as ' +
                 'specified in value type list element.'
-            )
-
-        if not (
-            not (that.value is not None)
-            or (
-                all(
-                    element.id_short is None
-                    for element in that.value
-                )
-            )
-        ):
-            yield Error(
-                'Constraint AASd-120: ID-short of submodel elements being ' +
-                'a direct child of a  Submodel element list shall not be ' +
-                'specified.'
             )
 
         if that.extensions is not None:
@@ -4020,16 +4080,6 @@ class _Transformer(
             )
 
         if not (
-            not (that.category is not None)
-            or (that.category in aas_constants.VALID_CATEGORIES_FOR_DATA_ELEMENT)
-        ):
-            yield Error(
-                'Constraint AASd-090: For data elements category shall be ' +
-                'one of the following values: CONSTANT, PARAMETER or ' +
-                'VARIABLE.'
-            )
-
-        if not (
             not (that.value is not None)
             or value_consistent_with_xsd_type(
                 that.value,
@@ -4296,16 +4346,6 @@ class _Transformer(
             yield Error(
                 'Embedded data specifications must be either not set or have ' +
                 'at least one item.'
-            )
-
-        if not (
-            not (that.category is not None)
-            or (that.category in aas_constants.VALID_CATEGORIES_FOR_DATA_ELEMENT)
-        ):
-            yield Error(
-                'Constraint AASd-090: For data elements category shall be ' +
-                'one of the following values: CONSTANT, PARAMETER or ' +
-                'VARIABLE.'
             )
 
         if not (
@@ -4590,16 +4630,6 @@ class _Transformer(
             )
 
         if not (
-            not (that.category is not None)
-            or (that.category in aas_constants.VALID_CATEGORIES_FOR_DATA_ELEMENT)
-        ):
-            yield Error(
-                'Constraint AASd-090: For data elements category shall be ' +
-                'one of the following values: CONSTANT, PARAMETER or ' +
-                'VARIABLE.'
-            )
-
-        if not (
             not (that.max is not None)
             or value_consistent_with_xsd_type(
                 that.max,
@@ -4879,16 +4909,6 @@ class _Transformer(
                 'at least one item.'
             )
 
-        if not (
-            not (that.category is not None)
-            or (that.category in aas_constants.VALID_CATEGORIES_FOR_DATA_ELEMENT)
-        ):
-            yield Error(
-                'Constraint AASd-090: For data elements category shall be ' +
-                'one of the following values: CONSTANT, PARAMETER or ' +
-                'VARIABLE.'
-            )
-
         if that.extensions is not None:
             for i, an_item in enumerate(that.extensions):
                 for error in self.transform(an_item):
@@ -5137,16 +5157,6 @@ class _Transformer(
                 'at least one item.'
             )
 
-        if not (
-            not (that.category is not None)
-            or (that.category in aas_constants.VALID_CATEGORIES_FOR_DATA_ELEMENT)
-        ):
-            yield Error(
-                'Constraint AASd-090: For data elements category shall be ' +
-                'one of the following values: CONSTANT, PARAMETER or ' +
-                'VARIABLE.'
-            )
-
         if that.extensions is not None:
             for i, an_item in enumerate(that.extensions):
                 for error in self.transform(an_item):
@@ -5293,14 +5303,15 @@ class _Transformer(
                 )
                 yield error
 
-        for error in verify_content_type(that.content_type):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'content_type'
+        if that.content_type is not None:
+            for error in verify_content_type(that.content_type):
+                error.path._prepend(
+                    PropertySegment(
+                        that,
+                        'content_type'
+                    )
                 )
-            )
-            yield error
+                yield error
 
     # noinspection PyMethodMayBeStatic
     def transform_file(
@@ -5402,16 +5413,6 @@ class _Transformer(
             yield Error(
                 'Embedded data specifications must be either not set or have ' +
                 'at least one item.'
-            )
-
-        if not (
-            not (that.category is not None)
-            or (that.category in aas_constants.VALID_CATEGORIES_FOR_DATA_ELEMENT)
-        ):
-            yield Error(
-                'Constraint AASd-090: For data elements category shall be ' +
-                'one of the following values: CONSTANT, PARAMETER or ' +
-                'VARIABLE.'
             )
 
         if that.extensions is not None:
@@ -5560,14 +5561,15 @@ class _Transformer(
                 )
                 yield error
 
-        for error in verify_content_type(that.content_type):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'content_type'
+        if that.content_type is not None:
+            for error in verify_content_type(that.content_type):
+                error.path._prepend(
+                    PropertySegment(
+                        that,
+                        'content_type'
+                    )
                 )
-            )
-            yield error
+                yield error
 
     # noinspection PyMethodMayBeStatic
     def transform_annotated_relationship_element(
@@ -5832,23 +5834,25 @@ class _Transformer(
                     )
                     yield error
 
-        for error in self.transform(that.first):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'first'
+        if that.first is not None:
+            for error in self.transform(that.first):
+                error.path._prepend(
+                    PropertySegment(
+                        that,
+                        'first'
+                    )
                 )
-            )
-            yield error
+                yield error
 
-        for error in self.transform(that.second):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'second'
+        if that.second is not None:
+            for error in self.transform(that.second):
+                error.path._prepend(
+                    PropertySegment(
+                        that,
+                        'second'
+                    )
                 )
-            )
-            yield error
+                yield error
 
         if that.annotations is not None:
             for i, yet_yet_yet_yet_yet_another_item in enumerate(that.annotations):
@@ -5994,8 +5998,8 @@ class _Transformer(
             )
 
         if not (
-            (
-                (
+            not (that.entity_type is not None)
+            or (
                 (
                     that.entity_type == aas_types.EntityType.SELF_MANAGED_ENTITY
                     and (
@@ -6017,19 +6021,11 @@ class _Transformer(
                     )
                 )
             )
-                or (
-                    (
-                        that.entity_type != aas_types.EntityType.SELF_MANAGED_ENTITY
-                        and (that.global_asset_id is None)
-                        and (that.specific_asset_ids is None)
-                    )
-                )
-            )
         ):
             yield Error(
                 'Constraint AASd-014: Either the attribute global asset ID ' +
-                'or specific asset ID must be set if entity type is set to ' +
-                'self-managed entity. They are not existing otherwise.'
+                'or specific asset ID must be set if Entity/entityType is ' +
+                'set to :attr:`Entity_type.Self_managed_entity`.'
             )
 
         if not (
@@ -7895,20 +7891,20 @@ class _Transformer(
             self,
             that: aas_types.EmbeddedDataSpecification
     ) -> Iterator[Error]:
-        for error in self.transform(that.data_specification):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'data_specification'
-                )
-            )
-            yield error
-
         for error in self.transform(that.data_specification_content):
             error.path._prepend(
                 PropertySegment(
                     that,
                     'data_specification_content'
+                )
+            )
+            yield error
+
+        for error in self.transform(that.data_specification):
+            error.path._prepend(
+                PropertySegment(
+                    that,
+                    'data_specification'
                 )
             )
             yield error
@@ -7939,14 +7935,15 @@ class _Transformer(
             )
             yield error
 
-        for error in self.transform(that.value_id):
-            error.path._prepend(
-                PropertySegment(
-                    that,
-                    'value_id'
+        if that.value_id is not None:
+            for error in self.transform(that.value_id):
+                error.path._prepend(
+                    PropertySegment(
+                        that,
+                        'value_id'
+                    )
                 )
-            )
-            yield error
+                yield error
 
     # noinspection PyMethodMayBeStatic
     def transform_value_list(
@@ -8147,7 +8144,7 @@ class _Transformer(
             )
         ):
             yield Error(
-                'Constraint AASc-3a-002: preferred name shall be provided at ' +
+                'Constraint AASc-002: preferred name shall be provided at ' +
                 'least in English.'
             )
 
@@ -8375,9 +8372,9 @@ def verify_identifier(
             'The value must not be empty.'
         )
 
-    if not (len(that) <= 2000):
+    if not (len(that) <= 2048):
         yield Error(
-            'Identifier shall have a maximum length of 2000 characters.'
+            'Identifier shall have a maximum length of 2048 characters.'
         )
 
 
@@ -8397,9 +8394,9 @@ def verify_value_type_iec_61360(
             'The value must not be empty.'
         )
 
-    if not (len(that) <= 2000):
+    if not (len(that) <= 2048):
         yield Error(
-            'Value type IEC 61360 shall have a maximum length of 2000 ' +
+            'Value type IEC 61360 shall have a maximum length of 2048 ' +
             'characters.'
         )
 
@@ -8552,9 +8549,9 @@ def verify_content_type(
             'The value must not be empty.'
         )
 
-    if not (len(that) <= 100):
+    if not (len(that) <= 128):
         yield Error(
-            'Content type shall have a maximum length of 100 characters.'
+            'Content type shall have a maximum length of 128 characters.'
         )
 
     if not matches_mime_type(that):
@@ -8580,9 +8577,15 @@ def verify_path_type(
             'The value must not be empty.'
         )
 
-    if not (len(that) <= 2000):
+    if not (len(that) <= 2048):
         yield Error(
-            'Identifier shall have a maximum length of 2000 characters.'
+            'Identifier shall have a maximum length of 2048 characters.'
+        )
+
+    if not matches_rfc_2396(that):
+        yield Error(
+            'String with max 2048 and min 1 characters conformant to ' +
+            'a URI as per RFC 2396.'
         )
 
 
@@ -8646,8 +8649,9 @@ def verify_id_short_type(
     if not matches_id_short(that):
         yield Error(
             'ID-short of Referables shall only feature letters, digits, ' +
-            'underscore (``_``); starting mandatory with a letter. ' +
-            '*I.e.* ``[a-zA-Z][a-zA-Z0-9_]*``.'
+            'hyphen (``-``) and  underscore (``_``); starting mandatory ' +
+            'with a letter, and not ending with a hyphen, *I.e.* ' +
+            '``^[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9_]+$``.'
         )
 
 

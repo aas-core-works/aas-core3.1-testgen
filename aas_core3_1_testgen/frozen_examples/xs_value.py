@@ -6,7 +6,7 @@ import aas_core_meta.v3
 from aas_core_codegen import intermediate
 from aas_core_codegen.common import Identifier
 
-from aas_core3_0_testgen.frozen_examples._types import Examples
+from aas_core3_1_testgen.frozen_examples._types import Examples
 
 # pylint: disable=line-too-long
 

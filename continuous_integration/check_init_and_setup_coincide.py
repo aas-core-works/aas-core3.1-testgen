@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-"""Check that the distribution and aas_core3_0_testgen/__init__.py are in sync."""
+"""Check that the distribution and aas_core3_1_testgen/__init__.py are in sync."""
 import os
 import pathlib
 import subprocess
 import sys
 from typing import Optional, Dict
 
-import aas_core3_0_testgen
+import aas_core3_1_testgen
 
 
 def main() -> int:
@@ -35,38 +35,38 @@ def main() -> int:
 
         setup_py_map[field] = out
 
-    if setup_py_map["version"] != aas_core3_0_testgen.__version__:
+    if setup_py_map["version"] != aas_core3_1_testgen.__version__:
         print(
             f"The version in the setup.py is {setup_py_map['version']}, "
-            f"while the version in aas_core3_0_testgen/__init__.py is: "
-            f"{aas_core3_0_testgen.__version__}",
+            f"while the version in aas_core3_1_testgen/__init__.py is: "
+            f"{aas_core3_1_testgen.__version__}",
             file=sys.stderr,
         )
         success = False
 
-    if setup_py_map["author"] != aas_core3_0_testgen.__author__:
+    if setup_py_map["author"] != aas_core3_1_testgen.__author__:
         print(
             f"The author in the setup.py is {setup_py_map['author']}, "
-            f"while the author in aas_core3_0_testgen/__init__.py is: "
-            f"{aas_core3_0_testgen.__author__}",
+            f"while the author in aas_core3_1_testgen/__init__.py is: "
+            f"{aas_core3_1_testgen.__author__}",
             file=sys.stderr,
         )
         success = False
 
-    if setup_py_map["license"] != aas_core3_0_testgen.__license__:
+    if setup_py_map["license"] != aas_core3_1_testgen.__license__:
         print(
             f"The license in the setup.py is {setup_py_map['license']}, "
-            f"while the license in aas_core3_0_testgen/__init__.py is: "
-            f"{aas_core3_0_testgen.__license__}",
+            f"while the license in aas_core3_1_testgen/__init__.py is: "
+            f"{aas_core3_1_testgen.__license__}",
             file=sys.stderr,
         )
         success = False
 
-    if setup_py_map["description"] != aas_core3_0_testgen.__doc__:
+    if setup_py_map["description"] != aas_core3_1_testgen.__doc__:
         print(
             f"The description in the setup.py is {setup_py_map['description']}, "
-            f"while the description in aas_core3_0_testgen/__init__.py is: "
-            f"{aas_core3_0_testgen.__doc__}",
+            f"while the description in aas_core3_1_testgen/__init__.py is: "
+            f"{aas_core3_1_testgen.__doc__}",
             file=sys.stderr,
         )
         success = False
@@ -110,11 +110,11 @@ def main() -> int:
     else:
         expected_status_in_init = status_map[status_classifier]
 
-        if expected_status_in_init != aas_core3_0_testgen.__status__:
+        if expected_status_in_init != aas_core3_1_testgen.__status__:
             print(
                 f"Expected status {expected_status_in_init} "
-                f"according to setup.py in aas_core3_0_testgen/__init__.py, "
-                f"but found: {aas_core3_0_testgen.__status__}"
+                f"according to setup.py in aas_core3_1_testgen/__init__.py, "
+                f"but found: {aas_core3_1_testgen.__status__}"
             )
             success = False
 
