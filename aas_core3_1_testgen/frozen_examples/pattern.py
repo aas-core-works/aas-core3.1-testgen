@@ -241,40 +241,34 @@ BY_PATTERN: Mapping[str, Examples] = collections.OrderedDict(
         ),
         # ID short
         (
-            "^[a-zA-Z][a-zA-Z0-9_]*$",
+            "^[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9_]+$",
             Examples(
                 positives=collections.OrderedDict(
                     [
-                        ("fuzzed_01", "Z0"),
-                        ("fuzzed_02", "gdVdV"),
-                        ("fuzzed_03", "uI"),
-                        ("fuzzed_04", "Yf5"),
-                        ("fuzzed_05", "l5"),
-                        ("fuzzed_06", "A10HQ7"),
-                        ("fuzzed_07", "g39dV"),
-                        ("fuzzed_08", "g1WbUAIAP_94"),
-                        ("fuzzed_09", "PiXO1wyHierj"),
-                        ("fuzzed_10", "fiZ"),
+                        ('fuzzed_01', 'fULCVpULCVq'),
+                        ('fuzzed_02', 'AopQejF'),
+                        ('fuzzed_03', 'Jk0k1414Di'),
+                        ('fuzzed_04', 'pVz10Vz10vZZNO9hM'),
+                        ('fuzzed_05', 't8x1pz9WS4TGV'),
+                        ('fuzzed_06', 'tWC'),
+                        ('fuzzed_07', 'xF2bO_Uje6'),
+                        ('fuzzed_08', 'EO5DYAe'),
+                        ('fuzzed_09', 'nRdRe'),
+                        ('fuzzed_10', 'P7gn'),
                     ]
                 ),
                 negatives=collections.OrderedDict(
                     [
-                        ("negatively_fuzzed_01", "L´"),
-                        ("negatively_fuzzed_02", "0"),
-                        (
-                            "negatively_fuzzed_03",
-                            "¹\U000f5c15¹s\U00035d55s?\U0008dd0a\x88z¢Z",
-                        ),
-                        ("negatively_fuzzed_04", "\U0005ec3e"),
-                        ("negatively_fuzzed_05", "¥&J\x13\U00067124"),
-                        ("negatively_fuzzed_06", "´"),
-                        (
-                            "negatively_fuzzed_07",
-                            "é\x0c&é𪩦\U0005647f\U000f4006É\U0010957a\U000af1fd",
-                        ),
-                        ("negatively_fuzzed_08", "\nÑ2"),
-                        ("negatively_fuzzed_09", "MÇj"),
-                        ("negatively_fuzzed_10", "\U0006f42bS³G"),
+                        ('negatively_fuzzed_01', '\U0009aabe\U000f0fab7'),
+                        ('negatively_fuzzed_02', '\x7f15'),
+                        ('negatively_fuzzed_03', '66a\x07 $\x05\x98V颵<8f\U000ce416\x88;ÉÐ2þ\U000c88e77y'),
+                        ('negatively_fuzzed_04', '\x87Y\U0005017d\U000cd22a'),
+                        ('negatively_fuzzed_05', '9䠄\U0005375d'),
+                        ('negatively_fuzzed_06', '@'),
+                        ('negatively_fuzzed_07', '[?Íô0Ù\U0007a0d4ê\x02¶𘏫s\U000c2e6e\x8dU\U0004587f°\U0001b5a6'),
+                        ('negatively_fuzzed_08', '\x84\x05'),
+                        ('negatively_fuzzed_09', '®\n|\x13h\x0fÈ\x81\x80\U000dd6ccQ\U000a98ec¥Õ'),
+                        ('negatively_fuzzed_10', '\U0009fc85\x13\U0005375d'),
                     ]
                 ),
             ),
