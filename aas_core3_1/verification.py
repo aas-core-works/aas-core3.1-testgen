@@ -1,12 +1,12 @@
 """
 Verify that the instances of the meta-model satisfy the invariants.
 
-Here is an example how to verify an instance of :py:class:`aas_core3.types.Extension`:
+Here is an example how to verify an instance of :py:class:`aas_core3_1.types.Extension`:
 
 .. code-block::
 
-    import aas_core3.types as aas_types
-    import aas_core3.verification as aas_verification
+    import aas_core3_1.types as aas_types
+    import aas_core3_1.verification as aas_verification
 
     an_instance = aas_types.Extension(
         # ... some constructor arguments ...
@@ -43,7 +43,7 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Final
 
-from aas_core3 import (
+from aas_core3_1 import (
     constants as aas_constants,
     types as aas_types,
 )

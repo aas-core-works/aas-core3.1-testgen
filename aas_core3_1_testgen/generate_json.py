@@ -23,7 +23,7 @@ from aas_core_codegen.common import Identifier
 from icontract import ensure, require
 from typing_extensions import assert_never
 
-from aas_core3 import jsonization as aasjsonization, verification as aasverification
+from aas_core3_1 import jsonization as aasjsonization, verification as aasverification
 from aas_core3_1_testgen import common, generation
 from aas_core3_1_testgen.codegened import preserialization
 

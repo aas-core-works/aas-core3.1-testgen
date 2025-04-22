@@ -19,8 +19,8 @@ from aas_core_codegen.common import Identifier
 from icontract import require, DBC
 from typing_extensions import assert_never
 
-import aas_core3.constants as aas_constants
-import aas_core3.types as aas_types
+import aas_core3_1.constants as aas_constants
+import aas_core3_1.types as aas_types
 from aas_core3_1_testgen import fixing, common, primitiving
 from aas_core3_1_testgen.codegened import creation, wrapping, preserialization
 from aas_core3_1_testgen.frozen_examples import (

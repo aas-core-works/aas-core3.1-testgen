@@ -5,7 +5,7 @@
 
 from typing import Set
 
-import aas_core3.types as aas_types
+import aas_core3_1.types as aas_types
 
 #: Enumeration of all identifiable elements within an asset administration shell.
 GENERIC_FRAGMENT_KEYS: Set[aas_types.KeyTypes] = {

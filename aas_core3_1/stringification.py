@@ -10,7 +10,7 @@ from typing import (
     Optional,
 )
 
-import aas_core3.types as aas_types
+import aas_core3_1.types as aas_types
 
 
 _MODELLING_KIND_FROM_STR: Mapping[str, aas_types.ModellingKind] = {
@@ -24,14 +24,14 @@ def modelling_kind_from_str(
 ) -> Optional[aas_types.ModellingKind]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.ModellingKind`.
+    of :py:class:`aas_core3_1.ModellingKind`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.ModellingKind`, return ``None``.
+    of :py:class:`aas_core3_1.ModellingKind`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.ModellingKind`
+        the corresponding literal of :py:class:`aas_core3_1.ModellingKind`
         or ``None``, if :paramref:`text` invalid.
     """
     return _MODELLING_KIND_FROM_STR.get(text, None)
@@ -49,14 +49,14 @@ def qualifier_kind_from_str(
 ) -> Optional[aas_types.QualifierKind]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.QualifierKind`.
+    of :py:class:`aas_core3_1.QualifierKind`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.QualifierKind`, return ``None``.
+    of :py:class:`aas_core3_1.QualifierKind`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.QualifierKind`
+        the corresponding literal of :py:class:`aas_core3_1.QualifierKind`
         or ``None``, if :paramref:`text` invalid.
     """
     return _QUALIFIER_KIND_FROM_STR.get(text, None)
@@ -75,14 +75,14 @@ def asset_kind_from_str(
 ) -> Optional[aas_types.AssetKind]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.AssetKind`.
+    of :py:class:`aas_core3_1.AssetKind`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.AssetKind`, return ``None``.
+    of :py:class:`aas_core3_1.AssetKind`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.AssetKind`
+        the corresponding literal of :py:class:`aas_core3_1.AssetKind`
         or ``None``, if :paramref:`text` invalid.
     """
     return _ASSET_KIND_FROM_STR.get(text, None)
@@ -114,14 +114,14 @@ def aas_submodel_elements_from_str(
 ) -> Optional[aas_types.AASSubmodelElements]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.AASSubmodelElements`.
+    of :py:class:`aas_core3_1.AASSubmodelElements`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.AASSubmodelElements`, return ``None``.
+    of :py:class:`aas_core3_1.AASSubmodelElements`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.AASSubmodelElements`
+        the corresponding literal of :py:class:`aas_core3_1.AASSubmodelElements`
         or ``None``, if :paramref:`text` invalid.
     """
     return _AAS_SUBMODEL_ELEMENTS_FROM_STR.get(text, None)
@@ -138,14 +138,14 @@ def entity_type_from_str(
 ) -> Optional[aas_types.EntityType]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.EntityType`.
+    of :py:class:`aas_core3_1.EntityType`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.EntityType`, return ``None``.
+    of :py:class:`aas_core3_1.EntityType`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.EntityType`
+        the corresponding literal of :py:class:`aas_core3_1.EntityType`
         or ``None``, if :paramref:`text` invalid.
     """
     return _ENTITY_TYPE_FROM_STR.get(text, None)
@@ -162,14 +162,14 @@ def direction_from_str(
 ) -> Optional[aas_types.Direction]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.Direction`.
+    of :py:class:`aas_core3_1.Direction`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.Direction`, return ``None``.
+    of :py:class:`aas_core3_1.Direction`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.Direction`
+        the corresponding literal of :py:class:`aas_core3_1.Direction`
         or ``None``, if :paramref:`text` invalid.
     """
     return _DIRECTION_FROM_STR.get(text, None)
@@ -186,14 +186,14 @@ def state_of_event_from_str(
 ) -> Optional[aas_types.StateOfEvent]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.StateOfEvent`.
+    of :py:class:`aas_core3_1.StateOfEvent`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.StateOfEvent`, return ``None``.
+    of :py:class:`aas_core3_1.StateOfEvent`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.StateOfEvent`
+        the corresponding literal of :py:class:`aas_core3_1.StateOfEvent`
         or ``None``, if :paramref:`text` invalid.
     """
     return _STATE_OF_EVENT_FROM_STR.get(text, None)
@@ -210,14 +210,14 @@ def reference_types_from_str(
 ) -> Optional[aas_types.ReferenceTypes]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.ReferenceTypes`.
+    of :py:class:`aas_core3_1.ReferenceTypes`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.ReferenceTypes`, return ``None``.
+    of :py:class:`aas_core3_1.ReferenceTypes`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.ReferenceTypes`
+        the corresponding literal of :py:class:`aas_core3_1.ReferenceTypes`
         or ``None``, if :paramref:`text` invalid.
     """
     return _REFERENCE_TYPES_FROM_STR.get(text, None)
@@ -256,14 +256,14 @@ def key_types_from_str(
 ) -> Optional[aas_types.KeyTypes]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.KeyTypes`.
+    of :py:class:`aas_core3_1.KeyTypes`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.KeyTypes`, return ``None``.
+    of :py:class:`aas_core3_1.KeyTypes`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.KeyTypes`
+        the corresponding literal of :py:class:`aas_core3_1.KeyTypes`
         or ``None``, if :paramref:`text` invalid.
     """
     return _KEY_TYPES_FROM_STR.get(text, None)
@@ -308,14 +308,14 @@ def data_type_def_xsd_from_str(
 ) -> Optional[aas_types.DataTypeDefXSD]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.DataTypeDefXSD`.
+    of :py:class:`aas_core3_1.DataTypeDefXSD`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.DataTypeDefXSD`, return ``None``.
+    of :py:class:`aas_core3_1.DataTypeDefXSD`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.DataTypeDefXSD`
+        the corresponding literal of :py:class:`aas_core3_1.DataTypeDefXSD`
         or ``None``, if :paramref:`text` invalid.
     """
     return _DATA_TYPE_DEF_XSD_FROM_STR.get(text, None)
@@ -349,14 +349,14 @@ def data_type_iec_61360_from_str(
 ) -> Optional[aas_types.DataTypeIEC61360]:
     """
     Parse :paramref:`text` as string representation
-    of :py:class:`aas_core3.DataTypeIEC61360`.
+    of :py:class:`aas_core3_1.DataTypeIEC61360`.
 
     If :paramref:`text` is not a valid string representation of a literal
-    of :py:class:`aas_core3.DataTypeIEC61360`, return ``None``.
+    of :py:class:`aas_core3_1.DataTypeIEC61360`, return ``None``.
 
     :param text: to be parsed
     :return:
-        the corresponding literal of :py:class:`aas_core3.DataTypeIEC61360`
+        the corresponding literal of :py:class:`aas_core3_1.DataTypeIEC61360`
         or ``None``, if :paramref:`text` invalid.
     """
     return _DATA_TYPE_IEC_61360_FROM_STR.get(text, None)

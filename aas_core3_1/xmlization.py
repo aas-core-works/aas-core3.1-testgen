@@ -25,7 +25,7 @@ different from :py:mod:`xml.etree.ElementTree`. For example, you can pass in
 
 All XML elements are expected to live in the :py:attr:`~NAMESPACE`.
 
-For writing, use the function :py:func:`aas_core3.xmlization.write` which
+For writing, use the function :py:func:`aas_core3_1.xmlization.write` which
 translates the instance of the model into an XML document and writes it in one pass
 to the stream.
 
@@ -36,7 +36,7 @@ Here is an example usage how to de-serialize from a file:
     import pathlib
     import xml.etree.ElementTree as ET
 
-    import aas_core3.xmlization as aas_xmlization
+    import aas_core3_1.xmlization as aas_xmlization
 
     path = pathlib.Path(...)
     instance = aas_xmlization.read_extension_from_file(
@@ -51,8 +51,8 @@ Here is another code example where we serialize the instance:
 
     import pathlib
 
-    import aas_core3.types as aas_types
-    import aas_core3.xmlization as aas_xmlization
+    import aas_core3_1.types as aas_types
+    import aas_core3_1.xmlization as aas_xmlization
 
     instance = Extension(
        ... # some constructor arguments
@@ -99,8 +99,8 @@ else:
         Protocol
     )
 
-import aas_core3.stringification as aas_stringification
-import aas_core3.types as aas_types
+import aas_core3_1.stringification as aas_stringification
+import aas_core3_1.types as aas_types
 
 # See: https://stackoverflow.com/questions/55076778/why-isnt-this-function-type-annotated-correctly-error-missing-type-parameters
 if TYPE_CHECKING:
@@ -291,7 +291,7 @@ def has_semantics_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -352,7 +352,7 @@ def has_semantics_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.has_semantics_from_stream(
@@ -397,7 +397,7 @@ def has_semantics_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.has_semantics_from_file(
@@ -443,7 +443,7 @@ def has_semantics_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.has_semantics_from_str(
@@ -489,7 +489,7 @@ def extension_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -550,7 +550,7 @@ def extension_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.extension_from_stream(
@@ -595,7 +595,7 @@ def extension_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.extension_from_file(
@@ -641,7 +641,7 @@ def extension_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.extension_from_str(
@@ -687,7 +687,7 @@ def has_extensions_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -748,7 +748,7 @@ def has_extensions_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.has_extensions_from_stream(
@@ -793,7 +793,7 @@ def has_extensions_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.has_extensions_from_file(
@@ -839,7 +839,7 @@ def has_extensions_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.has_extensions_from_str(
@@ -885,7 +885,7 @@ def referable_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -946,7 +946,7 @@ def referable_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.referable_from_stream(
@@ -991,7 +991,7 @@ def referable_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.referable_from_file(
@@ -1037,7 +1037,7 @@ def referable_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.referable_from_str(
@@ -1083,7 +1083,7 @@ def identifiable_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -1144,7 +1144,7 @@ def identifiable_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.identifiable_from_stream(
@@ -1189,7 +1189,7 @@ def identifiable_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.identifiable_from_file(
@@ -1235,7 +1235,7 @@ def identifiable_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.identifiable_from_str(
@@ -1281,7 +1281,7 @@ def has_kind_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -1342,7 +1342,7 @@ def has_kind_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.has_kind_from_stream(
@@ -1387,7 +1387,7 @@ def has_kind_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.has_kind_from_file(
@@ -1433,7 +1433,7 @@ def has_kind_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.has_kind_from_str(
@@ -1479,7 +1479,7 @@ def has_data_specification_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -1540,7 +1540,7 @@ def has_data_specification_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.has_data_specification_from_stream(
@@ -1585,7 +1585,7 @@ def has_data_specification_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.has_data_specification_from_file(
@@ -1631,7 +1631,7 @@ def has_data_specification_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.has_data_specification_from_str(
@@ -1677,7 +1677,7 @@ def administrative_information_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -1738,7 +1738,7 @@ def administrative_information_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.administrative_information_from_stream(
@@ -1783,7 +1783,7 @@ def administrative_information_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.administrative_information_from_file(
@@ -1829,7 +1829,7 @@ def administrative_information_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.administrative_information_from_str(
@@ -1875,7 +1875,7 @@ def qualifiable_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -1936,7 +1936,7 @@ def qualifiable_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.qualifiable_from_stream(
@@ -1981,7 +1981,7 @@ def qualifiable_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.qualifiable_from_file(
@@ -2027,7 +2027,7 @@ def qualifiable_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.qualifiable_from_str(
@@ -2073,7 +2073,7 @@ def qualifier_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -2134,7 +2134,7 @@ def qualifier_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.qualifier_from_stream(
@@ -2179,7 +2179,7 @@ def qualifier_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.qualifier_from_file(
@@ -2225,7 +2225,7 @@ def qualifier_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.qualifier_from_str(
@@ -2271,7 +2271,7 @@ def asset_administration_shell_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -2332,7 +2332,7 @@ def asset_administration_shell_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.asset_administration_shell_from_stream(
@@ -2377,7 +2377,7 @@ def asset_administration_shell_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.asset_administration_shell_from_file(
@@ -2423,7 +2423,7 @@ def asset_administration_shell_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.asset_administration_shell_from_str(
@@ -2469,7 +2469,7 @@ def asset_information_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -2530,7 +2530,7 @@ def asset_information_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.asset_information_from_stream(
@@ -2575,7 +2575,7 @@ def asset_information_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.asset_information_from_file(
@@ -2621,7 +2621,7 @@ def asset_information_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.asset_information_from_str(
@@ -2667,7 +2667,7 @@ def resource_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -2728,7 +2728,7 @@ def resource_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.resource_from_stream(
@@ -2773,7 +2773,7 @@ def resource_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.resource_from_file(
@@ -2819,7 +2819,7 @@ def resource_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.resource_from_str(
@@ -2865,7 +2865,7 @@ def specific_asset_id_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -2926,7 +2926,7 @@ def specific_asset_id_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.specific_asset_id_from_stream(
@@ -2971,7 +2971,7 @@ def specific_asset_id_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.specific_asset_id_from_file(
@@ -3017,7 +3017,7 @@ def specific_asset_id_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.specific_asset_id_from_str(
@@ -3063,7 +3063,7 @@ def submodel_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -3124,7 +3124,7 @@ def submodel_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.submodel_from_stream(
@@ -3169,7 +3169,7 @@ def submodel_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.submodel_from_file(
@@ -3215,7 +3215,7 @@ def submodel_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.submodel_from_str(
@@ -3261,7 +3261,7 @@ def submodel_element_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -3322,7 +3322,7 @@ def submodel_element_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.submodel_element_from_stream(
@@ -3367,7 +3367,7 @@ def submodel_element_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.submodel_element_from_file(
@@ -3413,7 +3413,7 @@ def submodel_element_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.submodel_element_from_str(
@@ -3459,7 +3459,7 @@ def relationship_element_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -3520,7 +3520,7 @@ def relationship_element_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.relationship_element_from_stream(
@@ -3565,7 +3565,7 @@ def relationship_element_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.relationship_element_from_file(
@@ -3611,7 +3611,7 @@ def relationship_element_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.relationship_element_from_str(
@@ -3657,7 +3657,7 @@ def submodel_element_list_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -3718,7 +3718,7 @@ def submodel_element_list_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.submodel_element_list_from_stream(
@@ -3763,7 +3763,7 @@ def submodel_element_list_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.submodel_element_list_from_file(
@@ -3809,7 +3809,7 @@ def submodel_element_list_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.submodel_element_list_from_str(
@@ -3855,7 +3855,7 @@ def submodel_element_collection_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -3916,7 +3916,7 @@ def submodel_element_collection_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.submodel_element_collection_from_stream(
@@ -3961,7 +3961,7 @@ def submodel_element_collection_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.submodel_element_collection_from_file(
@@ -4007,7 +4007,7 @@ def submodel_element_collection_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.submodel_element_collection_from_str(
@@ -4053,7 +4053,7 @@ def data_element_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -4114,7 +4114,7 @@ def data_element_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.data_element_from_stream(
@@ -4159,7 +4159,7 @@ def data_element_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.data_element_from_file(
@@ -4205,7 +4205,7 @@ def data_element_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.data_element_from_str(
@@ -4251,7 +4251,7 @@ def property_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -4312,7 +4312,7 @@ def property_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.property_from_stream(
@@ -4357,7 +4357,7 @@ def property_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.property_from_file(
@@ -4403,7 +4403,7 @@ def property_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.property_from_str(
@@ -4449,7 +4449,7 @@ def multi_language_property_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -4510,7 +4510,7 @@ def multi_language_property_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.multi_language_property_from_stream(
@@ -4555,7 +4555,7 @@ def multi_language_property_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.multi_language_property_from_file(
@@ -4601,7 +4601,7 @@ def multi_language_property_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.multi_language_property_from_str(
@@ -4647,7 +4647,7 @@ def range_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -4708,7 +4708,7 @@ def range_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.range_from_stream(
@@ -4753,7 +4753,7 @@ def range_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.range_from_file(
@@ -4799,7 +4799,7 @@ def range_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.range_from_str(
@@ -4845,7 +4845,7 @@ def reference_element_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -4906,7 +4906,7 @@ def reference_element_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.reference_element_from_stream(
@@ -4951,7 +4951,7 @@ def reference_element_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.reference_element_from_file(
@@ -4997,7 +4997,7 @@ def reference_element_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.reference_element_from_str(
@@ -5043,7 +5043,7 @@ def blob_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -5104,7 +5104,7 @@ def blob_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.blob_from_stream(
@@ -5149,7 +5149,7 @@ def blob_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.blob_from_file(
@@ -5195,7 +5195,7 @@ def blob_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.blob_from_str(
@@ -5241,7 +5241,7 @@ def file_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -5302,7 +5302,7 @@ def file_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.file_from_stream(
@@ -5347,7 +5347,7 @@ def file_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.file_from_file(
@@ -5393,7 +5393,7 @@ def file_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.file_from_str(
@@ -5439,7 +5439,7 @@ def annotated_relationship_element_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -5500,7 +5500,7 @@ def annotated_relationship_element_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.annotated_relationship_element_from_stream(
@@ -5545,7 +5545,7 @@ def annotated_relationship_element_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.annotated_relationship_element_from_file(
@@ -5591,7 +5591,7 @@ def annotated_relationship_element_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.annotated_relationship_element_from_str(
@@ -5637,7 +5637,7 @@ def entity_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -5698,7 +5698,7 @@ def entity_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.entity_from_stream(
@@ -5743,7 +5743,7 @@ def entity_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.entity_from_file(
@@ -5789,7 +5789,7 @@ def entity_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.entity_from_str(
@@ -5835,7 +5835,7 @@ def event_payload_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -5896,7 +5896,7 @@ def event_payload_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.event_payload_from_stream(
@@ -5941,7 +5941,7 @@ def event_payload_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.event_payload_from_file(
@@ -5987,7 +5987,7 @@ def event_payload_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.event_payload_from_str(
@@ -6033,7 +6033,7 @@ def event_element_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -6094,7 +6094,7 @@ def event_element_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.event_element_from_stream(
@@ -6139,7 +6139,7 @@ def event_element_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.event_element_from_file(
@@ -6185,7 +6185,7 @@ def event_element_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.event_element_from_str(
@@ -6231,7 +6231,7 @@ def basic_event_element_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -6292,7 +6292,7 @@ def basic_event_element_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.basic_event_element_from_stream(
@@ -6337,7 +6337,7 @@ def basic_event_element_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.basic_event_element_from_file(
@@ -6383,7 +6383,7 @@ def basic_event_element_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.basic_event_element_from_str(
@@ -6429,7 +6429,7 @@ def operation_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -6490,7 +6490,7 @@ def operation_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.operation_from_stream(
@@ -6535,7 +6535,7 @@ def operation_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.operation_from_file(
@@ -6581,7 +6581,7 @@ def operation_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.operation_from_str(
@@ -6627,7 +6627,7 @@ def operation_variable_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -6688,7 +6688,7 @@ def operation_variable_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.operation_variable_from_stream(
@@ -6733,7 +6733,7 @@ def operation_variable_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.operation_variable_from_file(
@@ -6779,7 +6779,7 @@ def operation_variable_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.operation_variable_from_str(
@@ -6825,7 +6825,7 @@ def capability_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -6886,7 +6886,7 @@ def capability_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.capability_from_stream(
@@ -6931,7 +6931,7 @@ def capability_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.capability_from_file(
@@ -6977,7 +6977,7 @@ def capability_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.capability_from_str(
@@ -7023,7 +7023,7 @@ def concept_description_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -7084,7 +7084,7 @@ def concept_description_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.concept_description_from_stream(
@@ -7129,7 +7129,7 @@ def concept_description_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.concept_description_from_file(
@@ -7175,7 +7175,7 @@ def concept_description_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.concept_description_from_str(
@@ -7221,7 +7221,7 @@ def reference_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -7282,7 +7282,7 @@ def reference_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.reference_from_stream(
@@ -7327,7 +7327,7 @@ def reference_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.reference_from_file(
@@ -7373,7 +7373,7 @@ def reference_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.reference_from_str(
@@ -7419,7 +7419,7 @@ def key_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -7480,7 +7480,7 @@ def key_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.key_from_stream(
@@ -7525,7 +7525,7 @@ def key_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.key_from_file(
@@ -7571,7 +7571,7 @@ def key_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.key_from_str(
@@ -7617,7 +7617,7 @@ def abstract_lang_string_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -7678,7 +7678,7 @@ def abstract_lang_string_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.abstract_lang_string_from_stream(
@@ -7723,7 +7723,7 @@ def abstract_lang_string_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.abstract_lang_string_from_file(
@@ -7769,7 +7769,7 @@ def abstract_lang_string_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.abstract_lang_string_from_str(
@@ -7815,7 +7815,7 @@ def lang_string_name_type_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -7876,7 +7876,7 @@ def lang_string_name_type_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.lang_string_name_type_from_stream(
@@ -7921,7 +7921,7 @@ def lang_string_name_type_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.lang_string_name_type_from_file(
@@ -7967,7 +7967,7 @@ def lang_string_name_type_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.lang_string_name_type_from_str(
@@ -8013,7 +8013,7 @@ def lang_string_text_type_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -8074,7 +8074,7 @@ def lang_string_text_type_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.lang_string_text_type_from_stream(
@@ -8119,7 +8119,7 @@ def lang_string_text_type_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.lang_string_text_type_from_file(
@@ -8165,7 +8165,7 @@ def lang_string_text_type_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.lang_string_text_type_from_str(
@@ -8211,7 +8211,7 @@ def environment_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -8272,7 +8272,7 @@ def environment_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.environment_from_stream(
@@ -8317,7 +8317,7 @@ def environment_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.environment_from_file(
@@ -8363,7 +8363,7 @@ def environment_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.environment_from_str(
@@ -8409,7 +8409,7 @@ def data_specification_content_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -8470,7 +8470,7 @@ def data_specification_content_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.data_specification_content_from_stream(
@@ -8515,7 +8515,7 @@ def data_specification_content_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.data_specification_content_from_file(
@@ -8561,7 +8561,7 @@ def data_specification_content_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.data_specification_content_from_str(
@@ -8607,7 +8607,7 @@ def embedded_data_specification_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -8668,7 +8668,7 @@ def embedded_data_specification_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.embedded_data_specification_from_stream(
@@ -8713,7 +8713,7 @@ def embedded_data_specification_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.embedded_data_specification_from_file(
@@ -8759,7 +8759,7 @@ def embedded_data_specification_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.embedded_data_specification_from_str(
@@ -8805,7 +8805,7 @@ def level_type_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -8866,7 +8866,7 @@ def level_type_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.level_type_from_stream(
@@ -8911,7 +8911,7 @@ def level_type_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.level_type_from_file(
@@ -8957,7 +8957,7 @@ def level_type_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.level_type_from_str(
@@ -9003,7 +9003,7 @@ def value_reference_pair_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -9064,7 +9064,7 @@ def value_reference_pair_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.value_reference_pair_from_stream(
@@ -9109,7 +9109,7 @@ def value_reference_pair_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.value_reference_pair_from_file(
@@ -9155,7 +9155,7 @@ def value_reference_pair_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.value_reference_pair_from_str(
@@ -9201,7 +9201,7 @@ def value_list_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -9262,7 +9262,7 @@ def value_list_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.value_list_from_stream(
@@ -9307,7 +9307,7 @@ def value_list_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.value_list_from_file(
@@ -9353,7 +9353,7 @@ def value_list_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.value_list_from_str(
@@ -9399,7 +9399,7 @@ def lang_string_preferred_name_type_iec_61360_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -9460,7 +9460,7 @@ def lang_string_preferred_name_type_iec_61360_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.lang_string_preferred_name_type_iec_61360_from_stream(
@@ -9505,7 +9505,7 @@ def lang_string_preferred_name_type_iec_61360_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.lang_string_preferred_name_type_iec_61360_from_file(
@@ -9551,7 +9551,7 @@ def lang_string_preferred_name_type_iec_61360_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.lang_string_preferred_name_type_iec_61360_from_str(
@@ -9597,7 +9597,7 @@ def lang_string_short_name_type_iec_61360_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -9658,7 +9658,7 @@ def lang_string_short_name_type_iec_61360_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.lang_string_short_name_type_iec_61360_from_stream(
@@ -9703,7 +9703,7 @@ def lang_string_short_name_type_iec_61360_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.lang_string_short_name_type_iec_61360_from_file(
@@ -9749,7 +9749,7 @@ def lang_string_short_name_type_iec_61360_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.lang_string_short_name_type_iec_61360_from_str(
@@ -9795,7 +9795,7 @@ def lang_string_definition_type_iec_61360_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -9856,7 +9856,7 @@ def lang_string_definition_type_iec_61360_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.lang_string_definition_type_iec_61360_from_stream(
@@ -9901,7 +9901,7 @@ def lang_string_definition_type_iec_61360_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.lang_string_definition_type_iec_61360_from_file(
@@ -9947,7 +9947,7 @@ def lang_string_definition_type_iec_61360_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.lang_string_definition_type_iec_61360_from_str(
@@ -9993,7 +9993,7 @@ def data_specification_iec_61360_from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -10054,7 +10054,7 @@ def data_specification_iec_61360_from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.data_specification_iec_61360_from_stream(
@@ -10099,7 +10099,7 @@ def data_specification_iec_61360_from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.data_specification_iec_61360_from_file(
@@ -10145,7 +10145,7 @@ def data_specification_iec_61360_from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.data_specification_iec_61360_from_str(
@@ -10192,7 +10192,7 @@ def from_iterparse(
         import pathlib
         import xml.etree.ElementTree as ET
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         with path.open("rt") as fid:
@@ -10253,7 +10253,7 @@ def from_stream(
 
     .. code-block::
 
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         with open_some_stream_over_network(...) as stream:
             instance = aas_xmlization.from_stream(
@@ -10295,7 +10295,7 @@ def from_file(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         path = pathlib.Path(...)
         instance = aas_xmlization.from_file(
@@ -10338,7 +10338,7 @@ def from_str(
     .. code-block::
 
         import pathlib
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.xmlization as aas_xmlization
 
         text = "<...>...</...>"
         instance = aas_xmlization.from_str(
@@ -31225,8 +31225,8 @@ def write(instance: aas_types.Class, stream: TextIO) -> None:
 
         import pathlib
 
-        import aas_core3.types as aas_types
-        import aas_core3.xmlization as aas_xmlization
+        import aas_core3_1.types as aas_types
+        import aas_core3_1.xmlization as aas_xmlization
 
         instance = Extension(
            ... # some constructor arguments

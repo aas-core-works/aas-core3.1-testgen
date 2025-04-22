@@ -440,7 +440,7 @@ from typing import (
 
 from aas_core3_1_testgen import common
 from aas_core3_1_testgen.codegened import creation
-from aas_core3 import types as aas_types"""
+from aas_core3_1 import types as aas_types"""
         ),
     ]
 

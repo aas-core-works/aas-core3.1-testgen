@@ -21,7 +21,7 @@ from aas_core_codegen import intermediate, infer_for_schema
 from icontract import ensure
 from typing_extensions import assert_never
 
-import aas_core3.types as aas_types
+import aas_core3_1.types as aas_types
 
 
 def load_symbol_table_and_infer_constraints_for_schema(

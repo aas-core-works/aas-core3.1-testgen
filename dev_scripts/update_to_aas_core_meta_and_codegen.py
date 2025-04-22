@@ -136,7 +136,7 @@ def _copy_python_sdk_and_schemas_from_aas_core_codegen(
         / "test_data/python/test_main/aas_core_meta.v3/expected_output"
     )
 
-    target_dir = our_repo / "aas_core3"
+    target_dir = our_repo / "aas_core3_1"
 
     for pth in source_dir.glob("*.py"):
         tgt_pth = target_dir / pth.name

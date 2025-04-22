@@ -32,9 +32,9 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Final
 
-import aas_core3.common as aas_common
-import aas_core3.stringification as aas_stringification
-import aas_core3.types as aas_types
+import aas_core3_1.common as aas_common
+import aas_core3_1.stringification as aas_stringification
+import aas_core3_1.types as aas_types
 
 
 class PropertySegment:

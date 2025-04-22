@@ -12,7 +12,7 @@ from typing import Callable, Mapping, Sequence
 
 from aas_core3_1_testgen import common
 from aas_core3_1_testgen import primitiving
-from aas_core3 import types as aas_types
+from aas_core3_1 import types as aas_types
 
 
 def minimal_has_semantics(path_hash: common.CanHash) -> aas_types.HasSemantics:

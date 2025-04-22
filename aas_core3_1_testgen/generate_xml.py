@@ -16,7 +16,7 @@ import aas_core_codegen.naming
 from aas_core_codegen import intermediate
 from aas_core_codegen.common import Identifier
 from icontract import ensure, require
-from aas_core3 import xmlization as aasxmlization, verification as aasverification
+from aas_core3_1 import xmlization as aasxmlization, verification as aasverification
 
 from aas_core3_1_testgen import common, generation
 from aas_core3_1_testgen.codegened import preserialization

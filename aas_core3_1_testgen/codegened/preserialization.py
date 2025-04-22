@@ -20,7 +20,7 @@ from typing import (
 
 from aas_core_codegen.common import Identifier, assert_never
 
-from aas_core3 import types as aas_types
+from aas_core3_1 import types as aas_types
 
 
 PrimitiveValueUnion = Union[bool, int, float, str, bytes]

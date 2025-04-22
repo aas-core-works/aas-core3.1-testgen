@@ -6,7 +6,7 @@
 
 
 from aas_core3_1_testgen import common
-from aas_core3 import types as aas_types
+from aas_core3_1 import types as aas_types
 
 
 class AbstractHandyman(aas_types.AbstractVisitorWithContext[common.CanHash]):
