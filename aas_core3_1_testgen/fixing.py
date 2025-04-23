@@ -316,9 +316,7 @@ class _Handyman(abstract_fixing.AbstractHandyman):
                         common.hash_path(path_hash, ["statements", i, "id_short"])
                     )
 
-        # Fix AASd-014: Either the attribute global asset ID or specific asset ID
-        # must be set if entity type is set to 'SelfManagedEntity'. They are not
-        # existing otherwise.
+        # Fix for AASd-014
         if that.entity_type is aas_types.EntityType.SELF_MANAGED_ENTITY:
             if that.global_asset_id is not None and that.specific_asset_ids is not None:
                 that.specific_asset_ids = None
